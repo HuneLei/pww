@@ -3,7 +3,7 @@
  */
 
 import api from './index';
-import config from './config';
+import config from '../config';
 
 const path = {
   validatePhone: '/validate/phone',

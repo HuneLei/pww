@@ -2,7 +2,7 @@
 import apiHome from '../../api/home';
 import apiUser from '../../api/user';
 import apiOrder from '../../api/order';
-import config from '../../api/config'
+import config from '../../config'
 
 Page({
 

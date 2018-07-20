@@ -1,2 +1,53 @@
-<!--pages/orders/orders.wxml-->
-<text>pages/orders/orders.wxml</text>
+<i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
+  <i-tab key="tab1" title="选项1"></i-tab>
+  <i-tab key="tab2" title="选项2"></i-tab>
+  <i-tab key="tab3" title="选项3"></i-tab>
+  <i-tab key="tab4" title="选项4"></i-tab>
+  <i-tab key="tab5" title="选项5"></i-tab>
+  <i-tab key="tab6" title="选项6"></i-tab>
+  <i-tab key="tab7" title="选项7"></i-tab>
+  <i-tab key="tab8" title="选项8"></i-tab>
+  <i-tab key="tab9" title="选项9"></i-tab>
+</i-tabs>
+
+<view>
+  <view wx:for="{{dataList}}" wx:key="{{index}}" class="order-item" wx:for-item="items">
+    <view class="top">
+      <view class="shop">
+        <image src="{{items.firstImg}}"> {{items.shopName}}</image>
+      </view>
+      <view class="base_orange">
+        <text wx:if="{{items.status !== 2 || (items.status === 2 && (items.serviceStatus === 0 || items.serviceStatus === 3 || items.serviceStatus === 4))}}">
+          <!-- {{orderTypeTip[`${items.orderType}${items.status}`]}} -->
+        </text>
+        <text wx:if="{{items.serviceStatus !== 3 && items.serviceStatus !== 4}}">{{serviceStatusOption[items.serviceStatus]}}</text>
+      </view>
+    </view>
+    <view class="center" bindtap="toOrderItem(items)">
+      <view class="product-img">
+        <image src="{{items.firstImgLog}}" alt=""></image>
+      </view>
+      <view class="content">
+        <view class="title">{{items.productName}}</view>
+        <view class="price">
+          <view style="color: black">¥{{items.price}}</view>
+          <view class="base_gray_little">{{items.travelDate}} 出行</view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom">
+      <view class="buy-img">
+        <view wx:for="{{groupLogos}}" wx:key="{{index}}">
+          <image> wx:if="{{index
+            < 5}} " class="hasImg " src="{{item}} " alt=" "></image>
+          <text wx:if="{{index>= 5}}">...</text>
+        </view>
+      </view>
+      <view class="btn">
+        <view class="btn-item base_blue_bg invite" wx:if="{{items.status === 0}}" bindtap="toPay(items)">去支付</view>
+        <view class="btn-item base_blue_bg invite" wx:if="{{items.status === 1}}" bindtap="toInvite(items)">邀请好友</view>
+        <view class="btn-item evaluate" wx:if="{{items.status === 3}}" bindtap="toEvaluate(items)">我要评价</view>
+      </view>
+    </view>
+  </view>
+</view>

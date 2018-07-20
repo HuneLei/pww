@@ -29,9 +29,9 @@ const listGroup = (form) => api.get(path.listGroup, {
 const list = (page, size, status, commentStatus, serviceStatus) => api.get(path.list, {
   page,
   size,
-  status, // 订单状态(1:待拼团2:待出游3:出游中4:已归来 5: 拼团失败, 6：确认消费)
-  commentStatus, // 评论状态(0,未评，1，已评，2，追加评论)
-  serviceStatus, // 售后状态(0:未申请 1:退团申请中2：同意退款3：驳回退款 4：撤销申请 5：已退款)
+  // status, // 订单状态(1:待拼团2:待出游3:出游中4:已归来 5: 拼团失败, 6：确认消费)
+  // commentStatus, // 评论状态(0,未评，1，已评，2，追加评论)
+  // serviceStatus, // 售后状态(0:未申请 1:退团申请中2：同意退款3：驳回退款 4：撤销申请 5：已退款)
 });
 
 // 填写订单
