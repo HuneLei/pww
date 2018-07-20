@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "i-input-number": "../../dist/input-number/index",
+    "i-panel": "../../dist/panel/index"
+  }
+}

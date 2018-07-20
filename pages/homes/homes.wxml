@@ -1,0 +1,39 @@
+<view>
+  <!-- 轮播图 -->
+  <view class="swiper-box">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots indicator-color="#d0cdd1" indicator-active-color="#04BE02" circular style='height: 360rpx'>
+      <block wx:for="{{baseList}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item.img}}" mode="scaleToFill" style='width:100%; height: 100%' />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- tab跳转 -->
+  <view class="tab-box">
+    <view class="tab-item" wx:for="{{tabList}}" wx:key="{{index}}">
+      <view bindtap='goProductList' data-type='{{item.type}}'>
+        <view class="tab-icon {{item.iconbg}}">
+          <i class="{{item.icon}}"></i>
+        </view>
+        <view class="tab-title">{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 为您推荐 -->
+  <view class="recommend-title">
+    <view class="title">为您推荐</view>
+    <info-list productList="{{dataList}}"></info-list>
+  </view>
+
+  <!--加载更多 -->
+  <view class="weui-loadmore" hidden="{{!requestLoading}}">
+    <view class="weui-loading"></view>
+    <view style="color:#ccc;text-align: center">正在加载</view>
+  </view>
+  <view style="color:#ccc;text-align: center" hidden="{{!requestLoadingComplete}}">
+    <span>
+      没有更多数据了
+    </span>
+  </view> 
+</view>

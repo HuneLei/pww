@@ -1,0 +1,105 @@
+<!--pages/date/data.wxml-->
+<view class="weui-tab">
+  <view class="weui-navbar">
+    <block wx:for="{{nomthNum}}" wx:key="{{index}}">
+      <view data-index="{{index}}" data-id="{{item.month}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <view class="weui-navbar__title">
+          <view>{{item.month}}月</view>
+          <view wx:if="{{item.price}}" class="{{activeIndex == index ? '' : 'item_money'}} item_money_out">
+            ￥{{item.price}} 起 </view>
+        </view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+  <view class="weui-tab__panel">
+    <block wx:for="3" wx:for-index="inx" wx:key="{{inx}}">
+      <!-- <view class="weui-tab__content" hidden="{{activeIndex != inx}}">  -->
+      <view class="weui-tab__content">
+        <view class="headbox2">
+          <view class="headdate headdate-weekend">日</view>
+          <view class="headdate">一</view>
+          <view class="headdate">二</view>
+          <view class="headdate">三</view>
+          <view class="headdate">四</view>
+          <view class="headdate">五</view>
+          <view class="headdate headdate-weekend">六</view>
+        </view>
+        <view class="mouth" wx:for="{{date}}" wx:key="{{index}}" wx:for-item="date" wx:for-index="index">
+          <!-- <view class="mouth" wx:for="{{date}}" wx:key="{{index}}" wx:for-item="date" wx:for-index="index" wx:if="{{index == activeIndex}}"> -->
+          <!-- <view class="mouthhead">{{date[index].year}}年{{date[index].month}}月</view> -->
+          <view class="daybox">
+            <view class="day" wx:if="{{weeks[index]>0}}"></view>
+            <view class="day" wx:if="{{weeks[index]>1}}"></view>
+            <view class="day" wx:if="{{weeks[index]>2}}"></view>
+            <view class="day" wx:if="{{weeks[index]>3}}"></view>
+            <view class="day" wx:if="{{weeks[index]>4}}"></view>
+            <view class="day" wx:if="{{weeks[index]>5}}"></view>
+            <block wx:for="{{date}}" wx:for-index="idx" wx:key="idx">
+              <view class="day {{selectNum == idx && !item.outday && date[idx].stockqty? 'selected-view':''}}" bindtap="selectday" bindtap='sureBind' data-indexs="{{idx}}" data-stockqty="{{date[idx].stockqty}}">
+                <text style='{{!item.outday || "color: #9e9e9e"}}' class='day_text'>{{date[idx].day}}</text>
+                <view class="actname" wx:if="{{date[idx].stockqty && !item.outday}}">
+                  <text space="emsp">￥{{date[idx].singlePrice}} </text>
+                </view>
+                <view class="actname2" wx:if="{{date[idx].stockqty && !item.outday}}">
+                  <text style='{{selectNum != idx || "color: white"}}'>余{{date[idx].stockqty}}</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+    </view>
+    <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view> -->
+  </view>
+</view>
+<!-- 购买数量 -->
+<view class='buynum-view'>
+  <view class='amount-view'>
+    <view>购买数量</view>
+    <view>仅剩
+      <text space='space="emsp"'> {{handadult.stockqty}} </text>位</view>
+  </view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">成人</view>
+      <view class="weui-cell__bd" class='cell-text'>
+        <text>￥{{handadult.singlePrice * handlevalue1}}</text>
+      </view>
+      <view class="weui-cell__bd" class='cell-text-last'>
+        <text>￥{{handadult.singlePrice}}*{{handlevalue1}}</text>
+      </view>
+      <view class="weui-cell__bd" style='flex:2;text-align:right'>
+        <i-input-number value="{{ handlevalue1 }}" min="0" max="100" bindchange="handleChangeOne" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">儿童
+        <text bindtap='warnView' class="icon iconfont icon-changjianwenti"></text>
+      </view>
+      <view class="weui-cell__bd" class='cell-text'>
+        <text>￥{{handadult.kidsPrice * handlevalue2}}</text>
+      </view>
+      <view class="weui-cell__bd" class='cell-text-last'>
+        <text>￥{{handadult.kidsPrice}}*{{handlevalue2}}</text>
+      </view>
+      <view class="weui-cell__bd" style='flex:2;text-align:right'>
+        <i-input-number value="{{ handlevalue2 }}" min="0" max="100" bindchange="handleChangeTwo" />
+      </view>
+    </view>
+  </view>
+  <view class='amount-view-text'>
+    <view wx:if='{{warnShow}}'>
+      <text space="ensp" style='color:red'><text class="icon iconfont icon-tishi"></text> {{childrenMore}}</text>
+    </view>
+    <view>
+      <text space="ensp"><text class="icon iconfont icon-tishi"></text> 由于各资源信息实时更新，成人、儿童价格以订单结算页价格为准</text>
+    </view>
+  </view>
+</view>
+<view class='hand-btton'>
+  <view class='hand-price'>￥{{amount}}</view>
+  <view class='hand-confirm' style='{{amount||"background-color: #666"}}' bindtap="submitbtn">确定</view>
+</view>

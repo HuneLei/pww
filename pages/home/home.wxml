@@ -1,0 +1,63 @@
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <scroll-view scroll-y lower-threshold="200" scroll-left="0" style="height: 100%;">
+      <view class="image-place">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-dots indicator-color="#d0cdd1" indicator-active-color="#04BE02" circular style='height: 11em'>
+          <block wx:for="{{imgUrls}}" wx:key="{{item}}">
+            <swiper-item>
+              <image src="{{item}}" mode="scaleToFill" style='width:100%; height: 100%' />
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class="weui-flex">
+        <view class="weui-flex__item" wx:for="{{urlList}}" wx:key="{{id}}">
+          <view class="view-place" bindtap="tapName">
+            <view class="mode-image" style='background-color:{{item.modecolor}}'>
+              <image src="{{item.imgsrc}}" mode="aspectFit"></image>
+            </view>
+            <view>{{item.test}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-flex" wx:for="{{dataList}}" wx:key="{{id}}">
+        <view class="weui-flex__item">
+          <view class="recommend-place">
+            <view wx:if="{{!index}}" class='recommend-head'>为您推荐</view>
+            <view class='recommend-image'>
+              <image mode="scaleToFill" src='http://2017051845.oss-cn-hangzhou.aliyuncs.com/45418711-f967-4505-96bf-7ee6ec7f754b..jpg'></image>
+            </view>
+            <view class='recommend-test'>厦门4日自由行(5钻)·「盛厦优选」3晚人气高星酒店·暑期直降800元/单·提前2天预定赠专车接机+专车送机·机场酒店零距离·可19元换购鼓浪屿轮渡票·万人热卖款</view>
+            <view class="weui-flex">
+              <view class="weui-flex__item">
+                <view class="placeholder text-money">￥2560<span> 起</span></view>
+              </view>
+              <view class="weui-flex__item" class ="base-image">
+                <image src='http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJicBk21hWeQ2agzCWKqQoc5pvMw6XVPibicyoe3rsx8Ze3FeVoOiamSQRggIPMboHzG5rVCOoRgvmFWg/132'></image>
+              </view>
+              <view class="weui-flex__item" class ="base-image">
+                <image src='http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJicBk21hWeQ2agzCWKqQoc5pvMw6XVPibicyoe3rsx8Ze3FeVoOiamSQRggIPMboHzG5rVCOoRgvmFWg/132'></image>
+              </view>
+              <view>
+                <view class="placeholder text-btn">去拼团</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="page__bd">
+        <view class="weui-loadmore">
+          <view class="weui-loading"></view>
+          <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+        </view>
+        <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+        </view>
+      </view> -->
+
+    </scroll-view>
+  </view>
+</view>

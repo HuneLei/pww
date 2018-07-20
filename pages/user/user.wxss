@@ -1,0 +1,48 @@
+.view-button {
+  margin-bottom: 1.2rem;
+}
+
+.view-button button {
+  text-align: center;
+  border: 1px solid #0ae;
+  color: #0ae;
+  width: 10rem;
+  line-height: 2.5;
+}
+
+.view-user {
+  background-color: white;
+}
+
+.view-image {
+  text-align: center;
+}
+
+.view-image image {
+  width: 3rem;
+  height: 3rem;
+  margin: 16px;
+}
+
+.weui-flex-flot {
+  background-color: white;
+  margin:0.6rem 0;
+  display: -webkit-box
+}
+
+.weui-flex__item {
+  text-align: center;
+  line-height: 1.6;
+  margin: 1.4rem 0 0.7rem 0;
+  color: #666;
+  font-size: 0.7rem;
+}
+
+.weui-flex__item image {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.weui-flex-flot .weui-flex__item {
+  margin: 0.5rem 0 0.5rem 0;
+}

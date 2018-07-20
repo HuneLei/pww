@@ -1,0 +1,50 @@
+<view class="page">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+        <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="weui-icon-search" type="search" size="14"></icon>
+        <view class="weui-search-bar__text">搜索目的地/景点/关键字</view>
+      </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+  <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view>实时搜索文本</view>
+      </view>
+    </navigator>
+    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view>实时搜索文本</view>
+      </view>
+    </navigator>
+    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view>实时搜索文本</view>
+      </view>
+    </navigator>
+    <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">
+        <view>实时搜索文本</view>
+      </view>
+    </navigator>
+  </view>
+  <i-card title="海南三亚2日1晚私家团(5钻)·房车带你深度游！A线私家游艇(出海) *B线尖峰岭(桃源天池)*C线七仙岭(天然雨林氧吧)" extra="广州市出发" money="1000" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg" times="4">
+    <view slot="content">推荐指数
+      <span style="color: rgb(255, 115, 0);" wx:for="times" wx:key="{{item}}"> ★ </span>
+    </view>
+  </i-card>
+  <i-card title="卡片标题" extra="广州市出发" money="1000" thumb="http://2017051845.oss-cn-hangzhou.aliyuncs.com/46364b37-3b33-4b16-a43d-1b3d3f9fe607..jpg">
+    <view slot="content">推荐指数
+      <span style="color: rgb(255, 115, 0);" wx:for="times" wx:key="{{item}}"> ★ </span>
+    </view>
+  </i-card>
+</view>

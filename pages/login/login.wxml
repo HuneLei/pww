@@ -1,0 +1,78 @@
+<view>
+  <view>
+    <i-cell is-link="{{isLogin}}">
+      <view class='view-touxiang'>
+        <block wx:if="{{!isLogin}}">
+          <image mode="scaleToFill" src='../../image/user-unlogin.png'></image>
+          <view class='view-button'>
+            <button plain bindgetuserinfo="bindgetuserinfo" open-type="getUserInfo" hover-class="none">
+              点击登录
+            </button>
+          </view>
+        </block>
+        <block wx:else="{{!isLogin}}">
+          <image class='view-image-login' mode="scaleToFill" src='{{userInfo.avatarUrl}}'></image>
+          <view class='view-button view-button-login'>
+            {{userInfo.nickName}}
+          </view>
+        </block>
+      </view>
+    </i-cell>
+    <i-panel class="panel-order">
+      <i-cell title="我的订单" is-link value="查看全部"></i-cell>
+    </i-panel>
+    <view class="order-item">
+      <view class="order-item-box" bindtap="toOrderList" data-type='1'>
+        <text class="icon iconfont icon-daifukuan orderItemIcon">
+        </text>
+        <i-badge wx:if="{{form.countStayPay}}" count="{{form.countStayPay}}" class="badge-text">
+          <view class="demo-badge"></view>
+        </i-badge>
+        <view>待付款</view>
+      </view>
+      <view class="order-item-box" bindtap="toOrderList" data-type='2'>
+        <text class="icon iconfont icon-pintuanguanli orderItemIcon">
+        </text>
+        <i-badge wx:if="{{form.countShare}}" count="{{form.countShare}}" class="badge-text">
+          <view class="demo-badge"></view>
+        </i-badge>
+        <view>待拼团</view>
+      </view>
+      <view class="order-item-box" bindtap="toOrderList" data-type='3'>
+        <text class="icon iconfont icon-feiji orderItemIcon">
+        </text>
+        <i-badge wx:if="{{form.countExcursion}}" count="{{form.countExcursion}}" class="badge-text">
+          <view class="demo-badge"></view>
+        </i-badge>
+        <view>待出行</view>
+      </view>
+      <view class="order-item-box" bindtap="toOrderList" data-type='4'>
+        <text class="icon iconfont icon-daipingjia orderItemIcon">
+        </text>
+        <i-badge wx:if="{{form.countAssess}}" count="{{form.countAssess}}" class="badge-text">
+          <view class="demo-badge"></view>
+        </i-badge>
+        <view>待评价</view>
+      </view>
+      <view class="order-item-box" bindtap="toOrderList" data-type='5'>
+        <text class="icon iconfont icon-tuikuan orderItemIcon">
+        </text>
+        <view>退款/售后</view>
+      </view>
+    </view>
+    <view class="my-action">
+      <view class="order-item-box" bindtap="toHistoryList()">
+        <text class="icon iconfont icon-lishi my-action-item-icon"></text>
+        <view>历史浏览</view>
+      </view>
+      <view class="order-item-box" bindtap="toEvaluateList()">
+        <text class="icon iconfont icon-pingjia1 my-action-item-icon"></text>
+        <view>我的评价</view>
+      </view>
+      <view class="order-item-box" bindtap="toSet()">
+        <text class="icon iconfont icon-sys my-action-item-icon"></text>
+        <view>设置</view>
+      </view>
+    </view>
+  </view>
+</view>

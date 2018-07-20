@@ -1,0 +1,1 @@
+<view class="time">还剩<span>{{h}}:{{m}}:{{s}}.{{ms}}</span></view>

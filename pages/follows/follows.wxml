@@ -1,0 +1,79 @@
+<view class="bg">
+  <!-- 搜索 -->
+  <view class="search-box">
+    <view class="search-item-area base_blue">
+      <i class="icon iconfont icon-weizhi"></i>
+      <span>{{city}}</span>
+    </view>
+    <!-- 综合排序 -->
+    <view class="search-item-sort" bindtap='toggleSort'>
+      <view class="p-sort-select-value">
+        <span class="p-sort-select-value-text">{{sortList[sortSelect].label}}</span>
+        <span class="p-sort-select-value-suffix">
+          <i wx:if="{{showSort}}" class="icon iconfont icon-sanjiaoxing-up-copy"></i>
+          <i wx:else class="icon iconfont icon-sanjiaoxing-up"></i>
+        </span>
+      </view>
+    </view>
+    <!-- 行程天数 -->
+    <view class="search-item-data" bindtap="toggleData">
+      <span>行程天数</span>
+      <span class="p-sort-select-value-suffix">
+        <i wx:if="{{showData}}" class="icon iconfont icon-sanjiaoxing-up-copy"></i>
+        <i wx:else class="icon iconfont icon-sanjiaoxing-up"></i>
+      </span>
+    </view>
+    <!-- 综合排序-下拉 -->
+    <view class="p-sort-select-box" wx:if="{{showSort}}" style="{{allHeight}}" bindtap="closeSort">
+      <view class="p-sort-select-ul">
+        <view class="p-sort-option {{sortSelect === item.value ? 'sort-selected' : ''}}" wx:for="{{sortList}}" wx:key="{{index}}" data-value="{{item.value}}" bindtap="selectOptionClick">
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+    <!-- 行程天数-下拉 -->
+    <view class="p-data-select-box" wx:if="{{showData}}" style="{{allHeight}}">
+      <view class="p-data-select-content">
+        <view class="p-data-select-title">
+          <span style="font-size: 16px">行程天数</span>
+          <span style="font-size: 12px">(多选)</span>
+        </view>
+        <!-- <view class="p-data-select-option"> -->
+        <!-- <checkbox-group bindchange="serviceValChange">
+          <view class="service_selection flex">
+            <view class="weui-flex">
+              <view class="weui-flex__item" span="4" offset="8" wx:for="{{dataOption}}" wx:key="{{index}}">
+                <view class=" item">
+                  <label class="checkbox {{item.checked?'is_checked':''}}">
+                    <checkbox value="{{item.value}}" checked="{{item.checked}}" hidden="false" />{{item.name}}
+                  </label>
+                </view>
+              </view>
+            </view>
+          </view>
+        </checkbox-group> -->
+        <!-- </view> -->
+        <view class="p-data-select-btn">
+          <view class="p-data-select-btn-delete" bindtap="closeData">清除</view>
+          <view class="p-data-select-btn-item" bindtap="changeData">确定</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 产品列表 -->
+  <view style="{{listHeight}}">
+    <div class="list-box">
+      <info-list-more productList="{{dataList}}"></info-list-more>
+    </div>
+  </view>
+  <!--加载更多 -->
+  <view class="weui-loadmore" hidden="{{!requestLoading}}">
+    <view class="weui-loading"></view>
+    <view style="color:#ccc;text-align: center">正在加载</view>
+  </view>
+  <view style="color:#ccc;text-align: center" hidden="{{!requestLoadingComplete}}">
+    <span>
+      没有更多数据了
+    </span>
+  </view> 
+</view>

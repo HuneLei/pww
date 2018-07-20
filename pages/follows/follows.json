@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "info-list-more": "/components/info-list-more/info-list-more"
+  }
+}

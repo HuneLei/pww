@@ -1,0 +1,20 @@
+<view class="i-class i-card {{ full ? 'i-card-full' : '' }}">
+  <view class="i-class i-card-header">
+    <view class="i-card-header-content">
+      <image class="i-card-header-thumb" src="{{ thumb }}" mode="scaleToFill" wx:if="{{ thumb }}" />
+      <view class="i-card-header-title" wx:if="{{ title }}">{{ title }}</view>
+      <view>
+        <view class="i-card-header-money" wx:if="{{ money }}">￥{{ money }}
+          <span> 起/人</span>
+        </view>
+        <view class="i-card-header-extra" wx:if="{{ extra }}">
+          <i-icon type="coordinates_fill" size="20" color="#80848f"></i-icon>
+          {{ extra }}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="i-class i-card-body">
+    <slot name="content"></slot>
+  </view>
+</view>

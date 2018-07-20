@@ -1,0 +1,96 @@
+.image-place {
+  text-align: center;
+  color: #cfcfcf;
+}
+
+.recommend-place {
+  margin: 0.6rem 0 0 0;
+  padding: 0 10px;
+  background-color: white;
+  line-height: 2.3em;
+}
+
+.view-place {
+  padding: 1rem 0 0 0;
+  text-align: center;
+  height: 6.5em;
+  line-height: 2.3em;
+  font-size: 0.8em;
+  background-color: white;
+  color: #222;
+}
+
+.mode-image {
+  width: 2.3rem;
+  height: 2.3rem;
+  line-height: 3.0rem;
+  border-radius: 50%;
+  color: white;
+  margin: 0 auto;
+}
+
+.mode-image image {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.recommend-head {
+  text-align: left;
+  padding: 0.2em 0.2em 0.6em 0.2em;
+  color: #222;
+}
+
+.recommend-image image {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.2rem;
+  background: center center no-repeat;
+  background-size: cover;
+}
+
+.recommend-image {
+  width: 100%;
+  height: 9rem;
+  padding-top: 0.8em;
+}
+
+.recommend-test {
+  font-size: 0.9em;
+  line-height: 1.2em;
+  padding: 0.6em 0.1em;
+}
+
+.base-image {
+}
+
+.text-money {
+  color: #ff7300;
+  font-size: 1rem;
+}
+
+.text-btn {
+  background-color: #ff7300;
+  width: 3.8rem;
+  height: 1.3rem;
+  line-height: 1.25rem;
+  color: white;
+  border-radius: 0.66667rem;
+  margin-left:0.3rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.text-money span {
+  font-size: 0.7rem;
+}
+
+.base-image image {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+}
+
+page {
+  background-color: #f8f8f8;
+  color: #222;
+}

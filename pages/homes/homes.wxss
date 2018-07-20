@@ -1,0 +1,97 @@
+.bg {
+  background-color: #f8f8f8;
+}
+
+.marquee {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 1;
+  max-width: 70%;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  transition: 2s;
+}
+
+.mar-head {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.mar-item {
+  width: 80%;
+  margin: 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tab-box {
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.tab-item {
+  width: 25%;
+  padding: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.tab-title {
+  margin-top: 5px;
+}
+
+.recommend-title {
+  background-color: white;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.title {
+  padding-left: 5px;
+  font-size: 16px;
+}
+
+.tab-icon {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 50%;
+  color: white;
+  margin: 0 auto;
+}
+
+.tab-icon .iconfont {
+  font-size: 24px;
+}
+
+.h-bg {
+  background-color: #fd5351;
+}
+
+.a-bg {
+  background-color: #0ae;
+}
+
+.g-bg {
+  background-color: #28cd5f;
+}
+
+.l-bg {
+  background-color: #ff7300;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

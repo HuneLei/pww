@@ -1,0 +1,129 @@
+/* components/trip-item/trip-item.wxss */
+@import '../../styles/reset.wxss';
+@import '../../styles/iconfont.wxss';
+
+.product-feature-title {
+  text-align: center;
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+.trip {
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.trip-item {
+  border-left: 1px solid #0ae;
+  margin-left: 30px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.tip-top {
+  position: relative;
+  display: flex;
+}
+
+.trip-date {
+  position: absolute;
+  top: -11px;
+  left: -52px;
+  width: 64px;
+  padding: 3px 0;
+  text-align: center;
+  background-color: #0ae;
+  color: white;
+  border-radius: 25px;
+}
+
+.trip-title {
+  /* position: absolute;
+  top: -11px;
+  left: 42px; */
+  padding-left: 20px;
+  margin-top: -7px;
+}
+
+.trip-text-title {
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 2px;
+}
+
+.trip-text-title-traffic {
+  margin-top: 15px;
+  margin-bottom: 2px;
+  position: relative;
+}
+
+.trip-text {
+  font-size: 12px;
+  color: #555;
+}
+
+.trip-detailed {
+  position: relative;
+  margin-top: 20px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f5f7fa;
+}
+
+.trip-icon {
+  position: absolute;
+  top: 0;
+  left: -30px;
+  background-color: white;
+  color: #0ae;
+}
+
+.trip-detailed-content {
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.trip-detailed-label {
+  position: absolute;
+  top: 0;
+  left: -52px;
+  width: 64px;
+  padding: 3px 0;
+  text-align: center;
+  background-color: #69cdf5;
+  color: #222;
+  border-radius: 25px;
+  font-size: 12px;
+}
+
+.trip-detailed-btn {
+  text-align: center;
+  font-size: 12px;
+}
+
+.end {
+  position: relative;
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.end-label {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 64px;
+  padding: 3px 0;
+  text-align: center;
+  background-color: #0ae;
+  color: white;
+  border-radius: 25px;
+}
+
+.end-title {
+  position: absolute;
+  top: 0;
+  left: 74px;
+  padding: 3px 0;
+}

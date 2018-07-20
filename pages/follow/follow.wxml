@@ -1,0 +1,85 @@
+<view class='follow-page'>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <view class="follw-place-fist" bindtap="tapCity">
+        <i-icon type="coordinates_fill" size="16" color="#80848f"></i-icon>深圳</view>
+    </view>
+    <view class="weui-flex__item">
+      <view bindtap="tapSort" class="follw-place-two">{{sort.sortTitle}}
+        <i-icon type="{{sort.pack}}" size="16" color="#80848f"></i-icon>
+      </view>
+    </view>
+    <view class="weui-flex__item">
+      <view bindtap="tapDate" class="follw-place-three">行程天数
+        <i-icon type="{{date.pack}}" size="16" color="#80848f"></i-icon>
+      </view>
+    </view>
+
+  </view>
+</view>
+<view class="sort-select-view">
+  <ul wx:if="{{sort.selectShow}}">
+    <li wx:for="{{selectList}}" wx:key="{{item.id}}" bindtap="tapSelect" id='sort_{{item.id}}' style="margin-top:{{index==0?'0.5rem':'0'}};margin-bottom:{{index==4?'0.5rem':'0'}};background-color: {{sortNum==item.id?'#f5f7fa':'white'}};color:{{sortNum==item.id?'#ff6600':'#606266'}}"
+      data-value="{{item.text}}">{{item.text}}
+      <i-icon type="right" size="20" color="#ff6600" wx:if="{{sortNum==item.id}}"></i-icon>
+    </li>
+  </ul>
+</view>
+<view class="date-select-view" wx:if="{{date.selectShow}}">
+  <view class='date-select-day'>行程天数
+    <span> (多选)</span>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item" wx:for="{{dateNum}}" wx:key="{{index}}">
+      <view class="date-place">
+        <button size='mini'>{{index+1}}天</button>
+      </view>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item" wx:for="{{dateNum}}" wx:key="{{index}}">
+      <view class="date-place">
+        <button size='mini'>{{index+6}}天</button>
+      </view>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item" wx:for="{{dateNum}}" wx:key="{{index}}">
+      <view class="date-place">
+        <button size='mini'>{{index+11}}天</button>
+      </view>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <view class="date-place date-place-button">
+        <view>
+          <button class="date-clear" size='mini'>清除</button>
+        </view>
+        <view>
+          <button class="date-sure" size='mini'>确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="sort-select-box" wx:if="{{sort.sortShow || date.dateShow}}" bindtap="tapLost">
+</view>
+<scroll-view scroll-y style='height: 100%;position:fixed;top:2rem'>
+  <view>
+    <view class='msg-flex' wx:for="{{listDate}}" wx:key='item.id'>
+      <image src='{{item.url}}'></image>
+      <view>
+        <view class='view-text'>{{item.text}}</view>
+        <view class='view-avatar'>
+          <i-avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="small"></i-avatar>
+        </view>
+        <view class='view-money'>
+          <view class='view-money-text'>
+            <span>￥111</span>起</view>
+          <view class='view-money-go'>去拼团</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

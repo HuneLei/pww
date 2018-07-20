@@ -1,0 +1,45 @@
+<view>
+  <view class='view-user'>
+    <view class='view-image'>
+      <image src='../../image/denglu.png'></image>
+    </view>
+    <view class='view-button'>
+      <button plain>点击登录</button>
+    </view>
+    <i-panel class="cell-panel-demo">
+      <i-cell title="我的订单" is-link value="查看全部"></i-cell>
+    </i-panel>
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+        <image src='../../image/fenxiang.png'></image>
+        <view class="view-place">待分享</view>
+      </view>
+      <view class="weui-flex__item">
+        <image src='../../image/chuyou.png'></image>
+        <view class="view-place">待出游</view>
+      </view>
+      <view class="weui-flex__item">
+        <image src='../../image/pinjia.png'></image>
+        <view class="view-place">待评价</view>
+      </view>
+      <view class="weui-flex__item">
+        <image src='../../image/tuikuan.png'></image>
+        <view class="view-place">退款/售后</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-flex-flot">
+    <view class="weui-flex__item">
+      <image src='../../image/lishi.png'></image>
+      <view class="view-place">历史浏览</view>
+    </view>
+    <view class="weui-flex__item">
+      <image src='../../image/pinjiale.png'></image>
+      <view class="view-place">我的评价</view>
+    </view>
+    <view class="weui-flex__item">
+      <image src='../../image/sezhi.png'></image>
+      <view class="view-place">设置</view>
+    </view>
+  </view>
+</view>

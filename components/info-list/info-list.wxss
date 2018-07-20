@@ -1,0 +1,107 @@
+@import "../../styles/reset.wxss";
+
+.recommend {
+  margin-bottom: 40px;
+}
+
+.recommend-list {
+  background-color: white;
+  margin-bottom: 6px;
+  padding-top: 13px;
+}
+
+.list-img {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.list-img img {
+  width: 350px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.bg-img {
+  width: 350px;
+  height: 150px;
+  border-radius: 5px;
+  background: center center no-repeat;
+  background-size: cover;
+}
+
+.list-img-tip {
+  position: absolute;
+  top: 0;
+  left: 13px;
+  color: white;
+  width: 50px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-top-left-radius: 5px;
+}
+
+.tip-g {
+  background-color: #0ae;
+}
+
+.tip-z {
+  background-color: #28cd5f;
+}
+
+.tip-b {
+  background-color: #ff7300;
+}
+
+.tip-y {
+  background-color: #fd5351;
+}
+
+.list-title {
+  margin: 8px 10px;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.list-bottom {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-num {
+  font-size: 20px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.list-right {
+  display: flex;
+  align-content: center;
+}
+
+.list-head {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  margin-left: -6px;
+  border: 1px solid #f8f8f8;
+}
+
+.list-btn {
+  width: 86px;
+  height: 27px;
+  line-height: 27px;
+  color: white;
+  border-radius: 25px;
+  margin-left: 10px;
+  font-size: 14px;
+  text-align: center;
+}

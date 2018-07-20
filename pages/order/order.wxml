@@ -1,0 +1,127 @@
+<!--pages/order/order.wxml-->
+<view class='page_view'>
+  <view class="my-tip">
+    <text space='ensp' class="icon iconfont icon-tongzhi"> 订单结果以实际支付成功为准</text>
+  </view>
+  <view class="order-title">{{productName}}</view>
+  <view class="order-select-info">
+    <text class="info-black">{{form.travelDate}}</text> 出发
+    <text wx:if="{{admit}}" class="info-black">{{admit}}</text>
+    <text wx:if="{{admit}}">成人</text>
+    <text wx:if="{{child}}" class="info-black">{{child}}</text>
+    <text wx:if="{{child}}">儿童</text>
+  </view>
+  <view class="time-tip">
+    <text class="icon iconfont icon-ttpodicon base_orange tip-icon"></text>
+    <view>
+      <view class="base_orange">24小时拼团</view>
+      <view class="tip-remark">完成拼团才能成功预约本次旅行，期待您的加入</view>
+    </view>
+  </view>
+  <view class="travel">
+    <view class="travel-title">
+      <text class="title-require">出行人信息</text>
+    </view>
+    <view class='trian-view'>
+      <i-row>
+        <i-col span="6">
+          <view class='pedestrian-view {{tapSelect}}'>咦啊咦啊啊</view>
+        </i-col>
+        <i-col span="6">
+          <view class='pedestrian-view'>+</view>
+        </i-col>
+        <!-- <i-col span="6">
+          <view class='pedestrian-view'>+</view>
+        </i-col>
+        <i-col span="6">
+          <view class='pedestrian-view'>+</view>
+        </i-col>   -->
+      </i-row>
+    </view>
+    <view>
+      <view class="travel-title">
+        <text class="title-require">联系人信息</text>
+      </view>
+      <i-input value="{{ form.orderContacts }}" title="联系人" autofocus placeholder="必填" />
+      <i-input value="{{ form.orderContactsPhone }}" type="number" disabled title="联系电话" placeholder="请输入手机号" />
+    </view>
+  </view>
+  <view class="special" bindtap="openSpecial">
+    <text>特殊需求</text>
+    <text class="icon iconfont icon-left-arrow righr-icon"></text>
+  </view>
+  <view class='add-title'>
+    <text>{{areaValue}}</text>
+  </view>
+  <view v:if="{{form.specialNeeds}}" class="specialNeeds">
+    {{form.specialNeeds}}
+  </view>
+  <view class="remarks base_gray_little">
+    <view>请确认所填写信息与所持证件信息一致，因信息不完整填写不正确造成的额外损失。保险拒赔等问题、我司不承担相应责任，需由客人自行承担。</view>
+    <view>大于2周岁不满12周岁的儿童不可使用出生证明，请使用身份证、户口簿等，出行请携带填写相应的证件</view>
+  </view>
+
+  <view class="remind">
+    点击支付则表示已阅读并接受
+    <text class="base_blue" bindtap='openNotice'>预订须知</text>
+  </view>
+  <view class="footer">
+    <view class="price base_orange">¥{{form.price}}</view>
+    <view class="cost base_blue" bindtap="showHideCost">费用明细</view>
+    <view class="pay base_orange_bg" bindtap="dataSave">立即支付</view>
+  </view>
+  <!-- 特殊需求 -->
+  <i-action-sheet visible="{{ visibleSpecial }}" showCancel="{{false}}" actions="{{ actionsSpecial }}" show-cancel bind:cancel="handleCancelSpecial" bind:click="handleClickSpecial">
+    <view slot="header">
+      <view class='header-title'>
+        <view class='special-head'>
+          <text></text>
+          <text space='emsp' class="special-title">  特殊需求</text>
+          <text bindtap='handleCancelSpecial'>关闭</text>
+        </view>
+        <view class="special-pass">您的特殊需求，我们会尽量协调，如无法满足，我们不会另行通知，请您见谅。</view>
+        <view class="spe-title">其他需求</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea name="textarea" class="weui-textarea" value="{{areaValue}}" placeholder="请输入需求内容" placeholder-style="font-size: 16px" maxlength="200" bindinput="bindinput" />
+              <view class="weui-textarea-counter">{{cursor}}/200</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </i-action-sheet>
+  <!-- 预订须知 -->
+  <i-action-sheet visible="{{ visibleNotice }}" showCancel="{{false}}" actions="{{ actionsNotice }}" show-cancel bind:cancel="handleCancelNotice" bind:click="handleClickNotice">
+    <view slot="header">
+      <view class='header-title'>
+        <view class="special-title">预订须知</view>
+        <view class="lc-title">预订须知：</view>
+        <view>{{reserveTemplateOne}}</view>
+        <view class="lc-title">签证信息:</view>
+        <text>{{reserveTemplateTwo}}</text>
+      </view>
+    </view>
+  </i-action-sheet>
+  <!-- 费用明细 -->
+  <i-action-sheet visible="{{ visibleCost }}" showCancel="{{false}}" actions="{{ actionsCost }}" show-cancel bind:cancel="handleCancelCost" bind:click="handleClickCost">
+    <view slot="header">
+      <view class='slot-header'>费用明细</view>
+      <view wx:if="{{admit}}" class='slot-foot'>
+        <view class='slot-foot-header'>成人</view>
+        <view class='slot-foot-admit'>
+          <text style='color:#999999'>￥2000*{{admit}}</text>￥4000</view>
+      </view>
+      <view wx:if="{{child}}" class='slot-foot'>
+        <view class='slot-foot-header'>儿童</view>
+        <view class='slot-foot-admit'>
+          <text style='color:#999999'>￥2000*{{child}}</text>￥4000</view>
+      </view>
+      <view class='slot-foot slot-cell'>
+        <view class='slot-foot-header'>总费用</view>
+        <view class='slot-foot-text'>￥4000</view>
+      </view>
+    </view>
+  </i-action-sheet>
+</view>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "i-modal": "../../dist/modal/index",
+    "i-button": "../../dist/button/index",
+    "i-message": "../../dist/message/index",
+    "trip-item": "/components/trip-item/trip-item",
+    "count-down-time": "/components/count-down-time/count-down-time"
+  }
+}

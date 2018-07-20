@@ -1,0 +1,89 @@
+.view-touxiang {
+  display: flex;
+  align-items: center;
+  padding: 0 0 30rpx 0;
+}
+
+.view-touxiang image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+}
+
+.view-image-login {
+  border: 2rpx solid #b4e5f9;
+}
+
+.view-button {
+  color: #0ae;
+  padding: 6rpx 20rpx;
+  margin-left: 40rpx;
+  font-size: 34rpx;
+}
+
+.view-button button {
+  color: #0ae;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.order-item-box {
+  width: 25%;
+  text-align: center;
+  color: #666;
+}
+
+.orderItemIcon {
+  font-size: 64rpx;
+  position: relative;
+  color: #0ae;
+}
+
+.order-item {
+  display: flex;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: white;
+  line-height: 1.5;
+}
+
+.order-item-box view {
+  color: #666;
+  font-size: 24rpx;
+}
+
+.badge-text view {
+  color: white;
+}
+
+.badge-text {
+  position: relative;
+  top: -50rpx;
+}
+
+.my-action {
+  display: flex;
+  line-height: 1.4;
+  padding: 30rpx 0;
+  margin-top: 26rpx;
+  margin-bottom: 104rpx;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.my-action-item-icon {
+  font-size: 64rpx;
+  color: #666;
+}
+
+.order-item-box {
+  width: 25%;
+  text-align: center;
+  color: #666;
+}
+
+.view-button-login {
+  color: #444;
+  font-weight: 600;
+}

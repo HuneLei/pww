@@ -1,0 +1,26 @@
+<view>
+  <view class="product-list" wx:for="{{productList}}" wx:key="{{index}}">
+    <view class="list-img" data-id="{{item.id}}" bindtap="goProductItem">
+      <view class="{{travalTypeColor[item.travalType]}}">
+        {{travalType[item.travalType]}}
+      </view>
+      <image src="{{item.logoUrl}}"></image>
+    </view>
+    <view class="product-list-right">
+      <view>
+        <view class="list-title" data-id="{{item.id}}" bindtap="goProductItem">{{item.name}}</view>
+        <view class="list-spell-img">
+          <view wx:for="{{item.headImgUrl}}" wx:key="{{index}}">
+            <image wx:if="{{index < 2}}" class="list-head" src="{{item}}"></image>
+          </view>
+          <view wx:if="{{item.headImgUrl.length > 2}}">...</view>
+        </view>
+      </view>
+      <view class="list-bottom">
+        <view class="list-price base_orange" data-id="{{item.id}}">
+          <span class="list-num">￥{{item.minGroupSinglePrice}}</span>起</view>
+        <view class="list-btn base_orange_bg" bindtap="goProductItem">去拼团</view>
+      </view>
+    </view>
+  </view>
+</view>

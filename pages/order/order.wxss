@@ -1,0 +1,250 @@
+/* pages/order/order.wxss */
+
+.page_view {
+  background-color: #f8f8f8;
+  font-size: 28rpx;
+}
+
+.my-tip {
+  padding: 6rpx;
+  background-color: #ff7300;
+  color: white;
+}
+
+.my-tip text {
+  font-size: 28rpx;
+}
+
+.order-title {
+  background-color: white;
+  padding: 20rpx;
+  color: #222;
+}
+
+.order-select-info {
+  padding: 10rpx 20rpx;
+  color: #555;
+}
+
+.info-black {
+  color: black;
+  font-weight: 600;
+  margin-left: 20rpx;
+}
+
+.time-tip {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: white;
+}
+
+.tip-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.tip-remark {
+  font-size: 24rpx;
+  color: #555;
+}
+
+.travel {
+  margin-top: 20rpx;
+  background-color: white;
+}
+
+.travel-title {
+  border-bottom: 2rpx solid #eaeaea;
+  padding: 10rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-require::before {
+  content: '*';
+  color: red;
+}
+
+.pedestrian-view {
+  border: 2rpx solid #ccc;
+  text-align: center;
+  margin: 14rpx;
+  padding: 6rpx;
+  border-radius: 8rpx;
+}
+
+.trian-view {
+  margin: 16rpx 0;
+}
+
+.orange-view {
+  color: white;
+  background-color: #ff7300;
+  border-color: #ff7300;
+}
+
+.special {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  margin-top: 20rpx;
+}
+
+.righr-icon {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.specialNeeds {
+  padding: 0 20rpx 0 20rpx;
+  font-size: 22rpx;
+  color: #666;
+}
+
+.remarks {
+  background-color: white;
+  font-size: 24rpx;
+  padding: 20rpx;
+}
+
+.remind {
+  padding: 10rpx 20rpx;
+  margin-bottom: 200rpx;
+}
+
+.footer {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  color: white;
+  background-color: white;
+  height: 96rpx;
+  line-height: 96rpx;
+  display: flex;
+}
+
+.price {
+  width: 30%;
+  font-size: 36rpx;
+}
+
+.cost {
+  width: 30%;
+  text-align: left;
+}
+
+.pay {
+  width: 40%;
+  font-size: 36rpx;
+}
+
+.slot-header {
+  background-color: #eee;
+  text-align: left;
+  color: #444;
+  font-size: 28rpx;
+  padding: 12rpx 28rpx;
+}
+
+.slot-foot {
+  color: #444;
+  display: flex;
+  background-color: white;
+  padding: 12rpx 28rpx;
+  font-size: 28rpx;
+  position: relative;
+}
+
+.slot-foot-header {
+  width: 50%;
+  text-align: left;
+}
+
+.slot-foot-admit {
+  width: 50%;
+  display: flex;
+  color: #ff7300;
+  justify-content: space-between;
+}
+
+.slot-foot-text {
+  width: 50%;
+  text-align: right;
+  color: #ff7300;
+}
+
+.slot-cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 28rpx;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0 solid #e9eaec;
+  border-top-width: 1px;
+}
+
+.lc-title {
+  color: black;
+  margin-top: 36rpx;
+  font-weight: 600;
+  font-size: 26rpx;
+  text-align: left;
+}
+
+.special-title {
+  font-size: 32rpx;
+  background-color: white;
+  text-align: center;
+}
+
+.header-title {
+  color: #444;
+  padding: 20rpx 20rpx 120rpx 20rpx;
+}
+
+.header-title {
+  text-align: left;
+  font-size: 26rpx;
+}
+
+.special-head {
+  display: flex;
+  font-size: 32rpx;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.special-pass {
+  color: #666;
+  text-align: left;
+  font-size: 24rpx;
+  background-color: #f8f8f8;
+  margin: 20rpx -20rpx;
+  padding: 16rpx 20rpx;
+}
+
+.spe-title {
+  color: #999;
+  font-size: 28rpx;
+  padding: 20rpx 0 0 30rpx;
+}
+
+.weui-cell {
+  background-color: #f8f8f8;
+}
+
+.add-title {
+  color: #666;
+  padding: 0rpx 20rpx 6rpx 20rpx;
+  font-size: 24rpx;
+}
