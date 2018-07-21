@@ -1,0 +1,23 @@
+<view class="order-single">
+  <view class="content">
+    <view class="img">
+      <image src="{{img}}"></image>
+    </view>
+    <view class="right">
+      <view>
+        <view class="title" bindtap="toProductItem">{{title}}</view>
+        <view class="base_gray_little">
+          <text wx:if="{{date}}">{{date}} 出行</text>
+        </view>
+      </view>
+      <view class="price base_gray_little">
+        <text>￥{{num}}</text>
+        <view>
+          <text wx:if="{{admit}}">{{admit}}成人</text>
+          <text wx:if="{{child}}">{{child}}儿童</text>
+        </view>
+        <text>{{payStatus[status]}}</text>
+      </view>
+    </view>
+  </view>
+</view>

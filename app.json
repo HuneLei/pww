@@ -1,5 +1,11 @@
 {
   "pages": [
+    "pages/place/place",
+    "pages/city/city",
+    "pages/follows/follows",
+    "pages/order-item/orderitem",
+    "pages/homes/homes",
+    "pages/order-list/orderlist",
     "pages/orders/orders",
     "pages/login/login",
     "pages/user/user",
@@ -7,11 +13,8 @@
     "pages/date/date",
     "pages/eili/eili",
     "pages/item/item",
-    "pages/homes/homes",
-    "pages/follows/follows",
     "pages/home/home",
     "pages/follow/follow",
-    "pages/city/city",
     "pages/find/find",
     "pages/chat/chat"
   ],
@@ -44,7 +47,7 @@
         "text": "聊天"
       },
       {
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/login/login",
         "iconPath": "image/user.png",
         "selectedIconPath": "image/user_selected.png",
         "text": "我的"

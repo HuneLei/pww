@@ -1,0 +1,215 @@
+.tip {
+  width: 100%;
+  padding: 28px 0 28px 20px;
+  box-sizing: border-box;
+  height: 104px;
+  background-color: #ff7300;
+  color: white;
+}
+
+.invite {
+  /* background: url(../../assets/img/invite.jpg) no-repeat; */
+  background-size: 100% 100%;
+}
+
+.success {
+  /* background: url(../../assets/img/success.jpg) no-repeat; */
+  background-size: 100% 100%;
+}
+
+.fail {
+  /* background: url(../../assets/img/fail.jpg) no-repeat; */
+  background-size: 100% 100%;
+}
+
+.tip-status {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.tip-prompt {
+  font-size: 14px;
+}
+
+.content {
+  padding: 30px 10px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.content-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.spelling-img {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  margin-top: 10px;
+}
+
+.hasImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.noImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 48px;
+  text-align: center;
+  color: #555;
+  border: 1px dashed #555;
+  margin-left: 20px;
+}
+
+.spelling-master {
+  position: relative;
+}
+
+.spelling-label {
+  position: absolute;
+  top: 2px;
+  left: -20px;
+  color: white;
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 25px;
+}
+
+.spelling-btn {
+  width: 70%;
+  margin-left: 15%;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 0;
+  color: white;
+  font-size: 14px;
+  /* margin-bottom: 20px; */
+}
+
+.content-tip {
+  font-size: 18px;
+}
+
+.count-down-box {
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.current-order {
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+}
+
+.current-order-title {
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.order-btn {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.btn-item {
+  width: 86px;
+  height: 27px;
+  line-height: 27px;
+  border-radius: 25px;
+  margin-left: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.invite {
+  color: white;
+}
+
+.delete {
+  color: #666;
+  border: 1px solid #666;
+}
+
+.evaluate {
+  color: #ff7300;
+  border: 1px solid #ff7300;
+}
+
+.confirm {
+  color: #0ae;
+  border: 1px solid #0ae;
+}
+
+.travel-contnet {
+  padding: 0 10px 10px 10px;
+}
+
+.demo5-item {
+  min-width: 64px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-sizing: border-box;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+.consult {
+  font-size: 16px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  padding: 10px 0;
+  background-color: white;
+  display: flex;
+  width: 100%;
+}
+
+.consult-tel {
+  width: 50%;
+  text-align: center;
+}
+
+.consult-chat {
+  width: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  border-left: 1px solid #ccc;
+}
+
+.consult-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.other {
+  margin-top: 10px;
+  background-color: white;
+  padding: 20px 10px;
+  position: relative;
+  line-height: 22px;
+}
+
+.other view {
+  font-size: 24rpx;
+  color: #444;
+}
+
+.copy {
+  padding: 3px 20px;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}

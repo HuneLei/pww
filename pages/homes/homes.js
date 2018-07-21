@@ -19,15 +19,19 @@ Page({
     dataList: [],
     baseList: [{
         url: '',
-        img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vvsr72j20p00gogo2.jpg',
+        img: '../../assets/img/banner/banner01.png',
       },
       {
         url: '',
-        img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw1k2wj20p00goq7n.jpg',
+        img: '../../assets/img/banner/banner02.png',
       },
       {
         url: '',
-        img: 'https://ww1.sinaimg.cn/large/663d3650gy1fq66vw50iwj20ff0aaaci.jpg',
+        img: '../../assets/img/banner/banner03.png',
+      },
+      {
+        url: '',
+        img: '../../assets/img/banner/banner04.png',
       },
     ],
     tabList: [{

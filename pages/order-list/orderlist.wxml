@@ -1,0 +1,6 @@
+<i-tabs color="rgb(0, 170, 238)" i-class="order-tabs" current="{{ tabscroll }}" scroll fixed bindchange="handleChangeScroll">
+  <i-tab i-class="order-tab" wx:for="{{tabList}}" wx:key="{{index}}" key="{{item.key}}" title="{{item.label}}"></i-tab>
+</i-tabs>
+<view class='order-list'>
+  <order-list afresh="{{afresh}}" status="{{status}}" commentStatus="{{commentStatus}}" serviceStatus="{{serviceStatus}}" selectTab="{{tabscroll}}" dataList="{{dataList}}"></order-list>
+</view>

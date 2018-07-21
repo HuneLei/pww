@@ -204,9 +204,9 @@
 .service_selection {
   padding: 15px 10px;
   background: #fff;
-  display:flex;
-  flex-wrap:wrap-reverse;
-  flex-direction:row;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  flex-direction: row;
   align-content: space-around;
 }
 
@@ -223,4 +223,27 @@
   border: 1px solid #fe0002;
   color: #fe0002;
   background: #fff;
+}
+
+.check_view {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 24rpx;
+  margin: 10rpx 25rpx 25rpx 25rpx;
+  justify-content: space-between;
+}
+
+.check_view_data {
+  display: flex;
+  justify-content: center;
+  border: 2rpx solid rgb(204, 204, 204);
+  height: 60rpx;
+  align-items: center;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  width: 18%
+}
+
+.hover_class {
+  background-color: #ececec;
 }

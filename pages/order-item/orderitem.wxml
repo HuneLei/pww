@@ -1,0 +1,151 @@
+<view id="top">
+  <!-- 顶部提示 订单状态(0:待支付1:待拼团2:待出行3:待评价4:已完成(已评价)5:已取消6:拼团失败) -->
+  <view class="tip" wx:if="{{form.serviceStatus === 0 || form.serviceStatus === 3 || form.serviceStatus === 4}}" style='{{tipStatusBg[3]}};background-size: 100% 100%;'>
+    <view class="tip-status">
+      <view wx:if="{{form.groupType === 0 && form.status === 2}}">预定成功</view>
+      <view wx:elif="{{form.groupType === 1 && form.status === 2}}">拼团成功，待出行</view>
+      <view wx:else>{{form.orderTypeTip}}</view>
+    </view>
+    <view class="tip-prompt">{{tipPrompt[form.status]}}</view>
+  </view>
+
+  <!-- 顶部提示 售后状态(1:退团申请中2：同意退款3：驳回退款4：撤销申请5：退款中6：已退款 ) -->
+  <view wx:else class="tip" style='{{tipStatusBg[form.serviceStatus]}};background-size: 100% 100%;'>
+    <view class="tip-status">
+      <view wx:if="{{form.status !== 2}}">{{form.orderTypeTip}}</view>
+      <view>{{serviceStatusOption}}</view>
+    </view>
+    <view class="tip-prompt">{{tipServiceStatusPrompt[form.serviceStatus]}}</view>
+  </view>
+
+  <!-- 待付款 -->
+  <view class="content" wx:if="{{form.status === 0}}">
+    <view class="content-tip base_gray">待付款</view>
+    <view class="count-down-box">
+      <count-down time="{{form.orderTime}}" interval="900000"></count-down>
+    </view>
+    <view class="spelling-btn base_blue_bg" bindtap="toPay()">去支付</view>
+  </view>
+
+  <!-- 待拼团 -->
+  <view class="content" wx:if="{{form.status === 1}}">
+    <view class="content-title">还差
+      <text class="base_orange">{{form.groupOrderNumber}}</text>位小伙伴就成功啦</view>
+    <view class="spelling-img">
+      <view wx:for="{{form.groupMemberLogos}}" wx:key="{{index}}">
+        <view class="spelling-master" wx:if="{{index === 0}}">
+          <image class="hasImg" src="{{item}}"></image>
+          <text class="spelling-label base_orange_bg">拼主</text>
+        </view>
+        <image wx:if="{{index > 0}}" class="hasImg" style="margin-left: 10px" src="{{item}}"></image>
+      </view>
+      <view class="noImg" wx:if="{{form.groupOrderNumber > 0}}">?</view>
+    </view>
+    <view class="count-down-box">
+      <count-down time="{{form.orderTime}}"></count-down>
+    </view>
+    <view class="spelling-btn base_blue_bg" bindtap="Invitation()">邀请好友拼团</view>
+  </view>
+
+  <!-- 待出行/待评价/已评价 -->
+  <view class="content" wx:if="{{(form.status === 2 || form.status === 3 || form.status === 4) && form.serviceStatus === 0}}">
+    <view wx:if="{{form.groupType === 0}}">
+      <view class="content-tip base_orange">恭喜您预定成功</view>
+      <view class="spelling-img">
+        <image class="hasImg" src="{{form.headImgUrl}}"></image>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="content-tip base_orange">恭喜您拼团成功</view>
+      <view class="spelling-img">
+        <view wx:for="{{form.groupMemberLogos}}" wx:key="{{index}}">
+          <view class="spelling-master" wx:if="{{index === 0}}">
+            <image class="hasImg" src="{{item}}"></image>
+            <text class="spelling-label base_orange_bg">拼主</text>
+          </view>
+          <image wx:if="{{index > 0}}" class="hasImg" style="margin-left: 10px" src="{{item}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已取消 -->
+  <view class="content" wx:if="{{form.status === 5}}">
+    <view class="content-tip base_gray">待付款</view>
+    <view class="count-down-box">
+      <count-down time="{{form.orderTime}}" interval="900000"></count-down>
+    </view>
+    <view class="spelling-btn base_blue_bg" bindtap="toProductItem">再次购买</view>
+  </view>
+
+  <!-- 退款/售后 -->
+  <view class="content" wx:if="{{form.serviceStatus !== 0 && form.status !== 0 && form.status !== 5}}">
+    <view wx:if="{{form.groupType === 0}}">
+      <view class="content-tip base_orange">恭喜您预定成功</view>
+      <view class="spelling-img">
+        <image class="hasImg" src="{{form.headImgUrl}}"></image>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="content-title" wx:if="{{form.status === 6}}">还差
+        <text class="base_orange">{{form.groupOrderNumber}}</text>位小伙伴就成功啦</view>
+      <view wx:else class="content-tip base_orange">拼团成功</view>
+
+      <view class="spelling-img">
+        <view wx:for="{{form.groupMemberLogos}}" wx:key="index">
+          <view class="spelling-master" wx:if="{{index === 0}}">
+            <image class="hasImg" src="{{item}}"></image>
+            <text class="spelling-label base_orange_bg">拼主</text>
+          </view>
+          <image wx:if="{{index > 0}}" class="hasImg" style="margin-left: 10px" src="{{item}}"></image>
+        </view>
+        <view class="noImg" wx:if="{{form.groupOrderNumber > 0}}">?</view>
+      </view>
+
+      <!-- 跳转到选择拼团 -->
+      <view class="spelling-btn base_blue_bg" wx:if="(form.status === 2 || form.status === 6) && (form.serviceStatus === 2 || form.serviceStatus === 6)" bindtap="toProductItem">重新拼团</view>
+    </view>
+  </view>
+
+  <!-- 当前订单 -->
+  <view class="current-order">
+    <view class="current-order-title">当前订单</view>
+    <order-single img="{{form.productLogo}}" title="{{form.productName}}" date="{{form.travelDate}}" num="{{form.price}}" admit="{{form.adultNumber}}" child="{{form.kidsNumber}}" status="{{form.payStatus}}" id="{{form.productId}}"></order-single>
+    <!-- 订单操作按钮 -->
+    <view class="order-btn">
+      <view class="btn-item delete" wx:if="{{form.status === 0}}" bindtap="toCloseOrder()">取消订单</view>
+      <view class="btn-item evaluate" wx:if="{{form.status === 3 && form.commentStatus === 0}}" bindtap="toEvaluate">我要评价</view>
+      <view class="btn-item evaluate" wx:if="{{form.status === 2 && form.serviceStatus === 0}}" bindtap="applyRefund">申请退款</view>
+      <view class="btn-item evaluate" wx:if="{{form.status === 2 && form.serviceStatus}}" bindtap="applyItem">售后详情</view>
+    </view>
+  </view>
+
+  <!-- 出行人 -->
+  <view class="current-order">
+    <view class="current-order-title">出行人</view>
+    <view>
+      <check-box datalist="{{form.orderTravalList}}" value="touristName" tap_open="{{true}}"></check-box>
+    </view>
+  </view>
+
+  <!-- 电话咨询 -->
+  <view class="consult">
+    <view class="consult-tel">
+      <a :href="`tel://${form.shopPhone}`" style="color: #333333">
+        <text class="icon iconfont icon-icon consult-icon base_blue"></text>电话咨询
+      </a>
+    </view>
+    <view class="consult-chat" bindtap="toChat">
+      <text class="icon iconfont icon-yijianfankui consult-icon base_blue"></text>在线咨询</view>
+  </view>
+
+  <!-- 订单其他信息 -->
+  <view class="other">
+    <view>订单编号：{{form.orderNo}}</view>
+    <view>支付方式：微信</view>
+    <view>下单时间：{{form.orderTime}}</view>
+    <view wx:if="{{form.groupType === 1 && (form.status === 2 || form.status === 3 || form.status === 4)}}">拼团时间：{{form.groupTime}}</view>
+    <view wx:if="{{form.commentStatus}}">评价时间：{{form.commentTime}}</view>
+    <view class="copy" bindtap="copyFn">复制</view>
+  </view>
+</view>

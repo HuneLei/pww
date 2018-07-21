@@ -1,0 +1,7 @@
+.order-tab {
+  width:160rpx !important;
+}
+
+.order-list {
+  margin-top:100rpx;
+}

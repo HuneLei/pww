@@ -1,0 +1,5 @@
+<view class='check_view'>
+  <block wx:for="{{datalist}}" wx:key="{{index}}">
+    <view class='check_view_data {{set_class}} {{!item.checked||tap_open||tap_class}}' hover-class="hover_class {{set_hover}}" style='width:{{100/num - 2}}%' bindtap='selecttap' data-index='{{index}}'>{{item[value]}}</view>
+  </block>
+</view>

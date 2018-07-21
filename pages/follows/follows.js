@@ -12,146 +12,76 @@ Page({
     selectStyle: `background: url(../../assets/img/active.png) no-repeat right bottom;
                   border-color: #ff4a00;`,
     allGoodsFilte: [{
-      name: '专人配送',
-      value: '0',
-      checked: true
-    },
-    {
-      name: '精品品牌',
-      value: '1',
-      checked: false
-    },
-    {
-      name: '超值优惠',
-      value: '2',
-      checked: false
-    },
-    {
-      name: '门店自提',
-      value: '3',
-      checked: false
-    },
-    {
-      name: '最快三小时',
-      value: '4',
-      checked: false
-    },
-    {
-      name: '专人配送',
-      value: '0',
-      checked: true
-    },
-    {
-      name: '精品品牌',
-      value: '1',
-      checked: false
-    },
-    {
-      name: '超值优惠',
-      value: '2',
-      checked: false
-    },
-    {
-      name: '门店自提',
-      value: '3',
-      checked: false
-    },
-    {
-      name: '最快三小时',
-      value: '4',
-      checked: false
-    },
-    {
-      name: '超值优惠',
-      value: '2',
-      checked: false
-    },
-    {
-      name: '门店自提',
-      value: '3',
-      checked: false
-    },
-    {
-      name: '最快三小时',
-      value: '4',
-      checked: false
-    },
+        name: '专人配送',
+        value: '0',
+        checked: true
+      },
+      {
+        name: '精品品牌',
+        value: '1',
+        checked: false
+      },
+      {
+        name: '超值优惠',
+        value: '2',
+        checked: false
+      },
+      {
+        name: '门店自提',
+        value: '3',
+        checked: false
+      },
+      {
+        name: '最快三小时',
+        value: '4',
+        checked: false
+      },
+      {
+        name: '专人配送',
+        value: '0',
+        checked: true
+      },
+      {
+        name: '精品品牌',
+        value: '1',
+        checked: false
+      },
+      {
+        name: '超值优惠',
+        value: '2',
+        checked: false
+      },
+      {
+        name: '门店自提',
+        value: '3',
+        checked: false
+      },
+      {
+        name: '最快三小时',
+        value: '4',
+        checked: false
+      },
+      {
+        name: '超值优惠',
+        value: '2',
+        checked: false
+      },
+      {
+        name: '门店自提',
+        value: '3',
+        checked: false
+      },
+      {
+        name: '最快三小时',
+        value: '4',
+        checked: false
+      },
     ],
     sortList: baseSelect.sortListOptions,
     sortSelect: 0,
     showSort: false,
     showData: false,
-    dataOption: [{
-      value: 0,
-      name: '不限',
-      checked: false
-    },
-    {
-      value: 1,
-      name: '3天',
-      checked: false
-    },
-    {
-      value: 2,
-      name: '4天',
-      checked: false
-    },
-    {
-      value: 3,
-      name: '5天',
-      checked: false
-    },
-    {
-      value: 4,
-      name: '6天',
-      checked: false
-    },
-    {
-      value: 5,
-      name: '7天',
-      checked: false
-    },
-    {
-      name: 6,
-      name: '8天',
-      checked: false
-    },
-    {
-      value: 7,
-      name: '9天',
-      checked: false
-    },
-    {
-      value: 8,
-      name: '10天',
-      checked: false
-    },
-    {
-      value: 9,
-      name: '11天',
-      checked: false
-    },
-    {
-      value: 10,
-      name: '12天',
-      checked: false
-    },
-    {
-      value: 11,
-      name: '13天',
-      checked: false
-    },
-    {
-      value: 12,
-      name: '14天',
-      checked: false
-    },
-    {
-      value: 13,
-      name: '15天以上',
-      checked: false
-    },
-    ],
+    dataOption: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     dataSelect: [0],
     dataList: [],
     list: [],
@@ -163,8 +93,18 @@ Page({
     listHeight: '',
     requestLoading: false, //"上拉加载"的变量，默认false，隐藏
     requestLoadingComplete: false, //“没有数据”的变量，默认false，隐藏
+    checked_style: `background: #ffffff url(../../assets/img/active.png) no-repeat right bottom;
+    border-color: #ff4a00;`
   },
-  serviceValChange: function (e) {
+  selecttap: function(e) {
+    let index = e.currentTarget.dataset.index;
+    let dataOption = this.data.dataOption;
+    dataOption[index] = !dataOption[index];
+    this.setData({
+      dataOption,
+    })
+  },
+  serviceValChange: function(e) {
     var dataOption = this.data.dataOption;
     var checkArr = e.detail.value;
     for (var i = 0; i < dataOption.length; i++) {
@@ -245,7 +185,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     this.setData({
       requestLoading: true,
       requestLoadingComplete: false
@@ -256,8 +196,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if (options.type){
+  onLoad: function(options) {
+    if (options.type) {
       this.setData({
         datatype: options.type,
       })
@@ -267,10 +207,10 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     var that = this;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         // 计算主体部分高度,单位为px
         that.setData({
           allHeight: `height: ${res.windowHeight - 32}px; overflow-y: auto;`,
@@ -284,35 +224,35 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

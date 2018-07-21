@@ -2,26 +2,26 @@
   <!-- 搜索 -->
   <view class="search-box">
     <view class="search-item-area base_blue">
-      <i class="icon iconfont icon-weizhi"></i>
-      <span>{{city}}</span>
+      <text class="icon iconfont icon-weizhi"></text>
+      <text>{{city}}</text>
     </view>
     <!-- 综合排序 -->
     <view class="search-item-sort" bindtap='toggleSort'>
       <view class="p-sort-select-value">
-        <span class="p-sort-select-value-text">{{sortList[sortSelect].label}}</span>
-        <span class="p-sort-select-value-suffix">
-          <i wx:if="{{showSort}}" class="icon iconfont icon-sanjiaoxing-up-copy"></i>
-          <i wx:else class="icon iconfont icon-sanjiaoxing-up"></i>
-        </span>
+        <text class="p-sort-select-value-text">{{sortList[sortSelect].label}}</text>
+        <text class="p-sort-select-value-suffix">
+          <text wx:if="{{showSort}}" class="icon iconfont icon-sanjiaoxing-up-copy"></text>
+        <text wx:else class="icon iconfont icon-sanjiaoxing-up"></text>
+        </text>
       </view>
     </view>
     <!-- 行程天数 -->
     <view class="search-item-data" bindtap="toggleData">
-      <span>行程天数</span>
-      <span class="p-sort-select-value-suffix">
-        <i wx:if="{{showData}}" class="icon iconfont icon-sanjiaoxing-up-copy"></i>
-        <i wx:else class="icon iconfont icon-sanjiaoxing-up"></i>
-      </span>
+      <text>行程天数</text>
+      <text class="p-sort-select-value-suffix">
+        <text wx:if="{{showData}}" class="icon iconfont icon-sanjiaoxing-up-copy"></text>
+      <text wx:else class="icon iconfont icon-sanjiaoxing-up"></text>
+      </text>
     </view>
     <!-- 综合排序-下拉 -->
     <view class="p-sort-select-box" wx:if="{{showSort}}" style="{{allHeight}}" bindtap="closeSort">
@@ -38,21 +38,11 @@
           <span style="font-size: 16px">行程天数</span>
           <span style="font-size: 12px">(多选)</span>
         </view>
-        <!-- <view class="p-data-select-option"> -->
-        <!-- <checkbox-group bindchange="serviceValChange">
-          <view class="service_selection flex">
-            <view class="weui-flex">
-              <view class="weui-flex__item" span="4" offset="8" wx:for="{{dataOption}}" wx:key="{{index}}">
-                <view class=" item">
-                  <label class="checkbox {{item.checked?'is_checked':''}}">
-                    <checkbox value="{{item.value}}" checked="{{item.checked}}" hidden="false" />{{item.name}}
-                  </label>
-                </view>
-              </view>
-            </view>
-          </view>
-        </checkbox-group> -->
-        <!-- </view> -->
+        <view class='check_view'>
+          <block wx:for="{{dataOption}}" wx:key="{{index}}">
+            <view class='check_view_data' style='{{!item||checked_style}}' bindtap='selecttap' data-index='{{index}}'>{{index + 1}}天</view>
+          </block>
+        </view>
         <view class="p-data-select-btn">
           <view class="p-data-select-btn-delete" bindtap="closeData">清除</view>
           <view class="p-data-select-btn-item" bindtap="changeData">确定</view>
@@ -75,5 +65,5 @@
     <span>
       没有更多数据了
     </span>
-  </view> 
+  </view>
 </view>

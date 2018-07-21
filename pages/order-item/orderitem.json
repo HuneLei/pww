@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "count-down": "/components/count-down/count-down",
+    "order-single": "/components/order-single/order-single",
+    "check-box": "/components/check-box/check-box"
+  }
+}

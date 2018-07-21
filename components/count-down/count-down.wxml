@@ -1,0 +1,9 @@
+<view class="down">
+  <view class="time" wx:if="{{time}}">
+    <text class="text">剩余</text>
+    <text class="item">{{h}}</text> :
+    <text class="item">{{m}}</text> :
+    <text class="item">{{s}}</text> .
+    <text class="item">{{ms}}</text>
+  </view>
+</view>

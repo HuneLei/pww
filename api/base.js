@@ -4,7 +4,33 @@
  * post
  */
 
-const apiFun = () => { };
+const apiFun = () => {};
+
+/**
+ *  判断传入参数的类型，以字符串的形式返回
+ *  @obj：数据
+ **/
+const dataType = (obj) => {
+  if (obj === null) return "Null";
+  if (obj === undefined) return "Undefined";
+  return Object.prototype.toString.call(obj).slice(8, -1);
+};
+
+/**
+ * 处理对象参数值，排除对象参数值为""、null、undefined，并返回一个新对象
+ **/
+const dealObjectValue = (obj) => {
+  let param = {};
+  if (obj === null || obj === undefined || obj === "") return param;
+  for (var key in obj) {
+    if (dataType(obj[key]) === "Object") {
+      param[key] = dealObjectValue(obj[key]);
+    } else if (obj[key] !== null && obj[key] !== undefined && obj[key] !== "") {
+      param[key] = obj[key];
+    }
+  }
+  return param;
+};
 
 const urlParams = (url, params) => {
   let ret = decodeURIComponent(url);
@@ -40,8 +66,11 @@ const urlParams = (url, params) => {
     if (keys && keys.length) {
       ret += '?';
       for (let i = 0; i < keys.length; i += 1) {
+
         const key = keys[i];
-        ret += `${i === 0 ? '' : '&'}${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`;
+        if (data[key] != null) {
+          ret += `${i === 0 ? '' : '&'}${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`;
+        }
       }
     }
   }
@@ -77,7 +106,7 @@ apiFun.prototype = {
    */
   get(path, data) {
     const that = this;
-
+    let reqData = dealObjectValue(data);
     //  请求前先拦截一下，看用户有没有自定义事件
     if (typeof that.request === 'function') {
       that.request(that);
@@ -88,7 +117,7 @@ apiFun.prototype = {
       url: `${that.baseUrl || ''}${path}`,
       data: {
         ...that.params,
-        ...data,
+        ...reqData,
       },
       success(res) {
         if (typeof that.callback === 'function') {
@@ -151,7 +180,7 @@ apiFun.prototype = {
     return this;
   },
   //  catch 回调失败事件
-  catch(callback) {
+  catch (callback) {
     if (typeof callback === 'function') {
       this.fail = callback;
     }

@@ -1,0 +1,23 @@
+.check_view {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 24rpx;
+  margin: 25rpx;
+  justify-content: space-between;
+}
+
+.check_view_data {
+  display: flex;
+  justify-content: center;
+  border: 2rpx solid rgb(204, 204, 204);
+  height: 50rpx;
+  align-items: center;
+  margin-top: 7px;
+  border-radius: 10rpx;
+}
+
+.tap_class {
+  color: white;
+  border: 2rpx solid #0ae;
+  background-color: #0ae;
+}

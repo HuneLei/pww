@@ -1,0 +1,55 @@
+<view>
+  <view wx:for="{{dataList}}" wx:key="{{index}}" class="order-item" wx:for-item="items">
+    <view class="top">
+      <view class="shop">
+        <image src="{{items.firstImg}}"> {{items.shopName}}</image>
+      </view>
+      <view class="base_orange">
+        <text wx:if="{{items.status !== 2 || (items.status === 2 && (items.serviceStatus === 0 || items.serviceStatus === 3 || items.serviceStatus === 4))}}">
+            {{items.orderTypeTip}}  
+        </text>
+        <text wx:if="{{items.serviceStatus !== 3 && items.serviceStatus !== 4}}">{{serviceStatusOption[items.serviceStatus]}}</text>
+      </view>
+    </view>
+    <view class="center" bindtap="toOrderItem(items)">
+      <view class="product-img">
+        <image src="{{items.firstImgLog}}" alt=""></image>
+      </view>
+      <view class="content">
+        <view class="title">{{items.productName}}</view>
+        <view class="price">
+          <view style="color: black">¥{{items.price}}</view>
+          <view class="base_gray_little">{{items.travelDate}} 出行</view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom">
+      <view class="buy-img">
+        <view wx:for="{{items.groupLogos}}" wx:key="{{index}}">
+          <image wx:if="{{index < 5}}" class="hasImg" src="{{item}}"></image>
+          <text wx:if="{{index>= 5}}">...</text>
+        </view>
+      </view>
+      <view class="btn">
+        <view class="btn-item base_blue_bg invite" wx:if="{{items.status === 0}}" bindtap="toPay(items)">去支付</view>
+        <view class="btn-item base_blue_bg invite" wx:if="{{items.status === 1}}" bindtap="toInvite(items)">邀请好友</view>
+        <view class="btn-item evaluate" wx:if="{{items.status === 3}}" bindtap="toEvaluate(items)">我要评价</view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view wx:if="{{dataList.length > 0}}" style="color:#ccc">没有更多数据了。。。。</view>
+    <view wx:if="{{dataList.length === 0}}" class="no-data">
+      <text class="icon iconfont icon-meiyoudingdan no-data-icon"></text>
+      <view class="no-data-tip">
+        {{selectTabOption[selectTab]}}
+      </view>
+    </view>
+  </view>
+  <view slot="no-results" class="no-data">
+    <text class="icon iconfont icon-meiyoudingdan no-data-icon"></text>
+    <view class="no-data-tip">
+      {{selectTabOption[selectTab]}}
+    </view>
+  </view>
+</view>

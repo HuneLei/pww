@@ -30,7 +30,7 @@
 
 view {
   font-family: "微软雅黑";
-  color: #444;
+  /* color: #444; */
 }
 
 page {

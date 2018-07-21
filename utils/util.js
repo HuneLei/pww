@@ -33,6 +33,12 @@ var showModel = (title, content) => {
   })
 }
 
+wx.showToast({
+  title: '成功',
+  icon: 'success',
+  duration: 2000
+})
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n

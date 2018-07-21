@@ -1,0 +1,26 @@
+.down {
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #eaeaea;
+  text-align: center;
+  font-size: 12px;
+}
+
+.time {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  padding: 0 10px;
+  margin-left: -86px;
+  background-color: white;
+}
+
+.text {
+  margin: 0 5px;
+}
+
+.item {
+  border: 1px solid #666;
+  padding: 0 4px;
+  border-radius: 4px;
+}
