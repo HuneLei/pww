@@ -39,40 +39,42 @@
       </view>
     </navigator>
   </view> -->
-  <view class="search-box" style="{{cityListHeight}}">
-    <view class="left" id="left">
-      <view class="left-top">
-        <view id="current">当前</view>
-        <view class="current">
-          <text class="icon iconfont icon-weizhi"></text>
-          <text>{{city}}</text>
+  <scroll-view style='{{windowHeight}}' scroll-y scroll-into-view="{{scrollitem}}">
+    <view class="search-box" style="{{cityListHeight}}">
+      <view class="left" id="left">
+        <view class="left-top">
+          <view id="current">当前</view>
+          <view class="current">
+            <text class="icon iconfont icon-weizhi"></text>
+            <text>{{city}}</text>
+          </view>
+          <view class="history-title mar-title" id="history">
+            <text>历史选择</text>
+            <text class="icon iconfont icon-tubiaolunkuo- delete-icon" bindtap="deleteHistory()" v-if="historyList.length > 0"></text>
+          </view>
+          <ul class="hot">
+            <li wx:for="{{historyList}}" wx:key="{{index}}" wx:if="{{index < 20}}" bindtap="selectCityHistory(item)">{{item}}</li>
+          </ul>
+          <view id="hot" class="mar-title">热门出发地</view>
+          <ul class="hot">
+            <li wx:for="{{hotList}}" wx:key="{{index}}" bindtap="selectCityHot(item)">{{item.label}}</li>
+          </ul>
         </view>
-        <view class="history-title mar-title" id="history">
-          <text>历史选择</text>
-          <text class="icon iconfont icon-tubiaolunkuo- delete-icon" bindtap="deleteHistory()" v-if="historyList.length > 0"></text>
+        <!-- 市 -->
+        <view wx:for="{{cityList}}" wx:key="{{index}}">
+          <view class="title" id="{{item.title}}">{{item.title}}</view>
+          <view class="label" wx:for="{{item.list}}" wx:key="{{index}}" bindtap="selectCity(item)">{{item.name}}</view>
         </view>
-        <ul class="hot">
-          <li wx:for="{{historyList}}" wx:key="{{index}}" wx:if="{{index < 20}}" bindtap="selectCityHistory(item)">{{item}}</li>
-        </ul>
-        <view id="hot" class="mar-title">热门出发地</view>
-        <ul class="hot">
-          <li wx:for="{{hotList}}" wx:key="{{index}}" bindtap="selectCityHot(item)">{{item.label}}</li>
-        </ul>
+        <view style="height: 20px"></view>
       </view>
-      <!-- 市 -->
-      <view wx:for="{{cityList}}" wx:key="{{index}}">
-        <view class="title" id="{{item.title}}">{{item.title}}</view>
-        <view class="label" wx:for="{{item.list}}" wx:key="{{index}}" bindtap="selectCity(item)">{{item.name}}</view>
-      </view>
-      <view style="height: 20px"></view>
     </view>
-  </view>
-  <!-- 快捷跳转 -->
-  <view class="right base_blue" style="{{allHeight}}">
-    <!-- <view bindtap="toArea" data-item="search-input">搜索</view> -->
-    <view bindtap="toArea" data-item="current">当前</view>
-    <view bindtap="toArea" data-item="history">历史</view>
-    <view bindtap="toArea" data-item="hot">热门</view>
-    <view wx:for="{{letter}}" wx:key="index" data-item="{{item}}" bindtap="toArea">{{item}}</view>
-  </view>
+    <!-- 快捷跳转 -->
+    <view class="right base_blue" style="{{allHeight}}">
+      <!-- <view bindtap="toArea" data-item="search-input">搜索</view> -->
+      <view bindtap="toArea" data-item="current">当前</view>
+      <view bindtap="toArea" data-item="history">历史</view>
+      <view bindtap="toArea" data-item="hot">热门</view>
+      <view wx:for="{{letter}}" wx:key="index" data-item="{{item}}" bindtap="toArea">{{item}}</view>
+    </view>
+  </scroll-view>
 </view>

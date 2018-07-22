@@ -38,15 +38,9 @@ const item = (id, type) => api.get(path.item, {
 const calendarList = (form) => api.get(path.calendarList, {
     productId: form.productId,
     type: form.type, // type 查询方式（week:周,month:月,march:最近三月）day 一天
-});
-
-// 价格日历
-const calendarLists = (form) => api.get(path.calendarList, {
-  productId: form.productId,
-  type: form.type, // type 查询方式（week:周,month:月,march:最近三月）day 一天
-  year: form.year,
-  month: form.month,
-  // date: form.date,
+    year: form.year,
+    month: form.month,
+    date: form.date,
 });
 
 // 行程信息
@@ -66,7 +60,6 @@ export default {
   list,
   item,
   calendarList,
-  calendarLists,
   agendaItem,
   explain,
   discovery,

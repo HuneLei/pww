@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/homes/homes",
+    "pages/item/item",
     "pages/place/place",
     "pages/city/city",
     "pages/follows/follows",
     "pages/order-item/orderitem",
-    "pages/homes/homes",
     "pages/order-list/orderlist",
     "pages/orders/orders",
     "pages/login/login",
@@ -12,8 +13,6 @@
     "pages/order/order",
     "pages/date/date",
     "pages/eili/eili",
-    "pages/item/item",
-    "pages/home/home",
     "pages/follow/follow",
     "pages/find/find",
     "pages/chat/chat"
@@ -22,7 +21,7 @@
     "backgroundColor": "#f8f8f8",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "约玩玩",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

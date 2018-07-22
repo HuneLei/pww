@@ -71,7 +71,7 @@ Page({
       year: this.data.cYear,
       month: this.data.cMonth,
     };
-    apiHome.calendarLists(form).then((res) => {
+    apiHome.calendarList(form).then((res) => {
       if (res.data.code === 0) {
         let nomthNum = [];
         const data = res.data.result;
@@ -133,7 +133,7 @@ Page({
       month: months,
     };
     let that = this;
-    apiHome.calendarLists(form).then((res) => {
+    apiHome.calendarList(form).then((res) => {
       if (res.data.code === 0) {
         const data = res.data.result;
         this.dateData(data, form.month, that)

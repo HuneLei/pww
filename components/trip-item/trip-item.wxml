@@ -1,34 +1,33 @@
-<!--components/trip-item/trip-item.wxml-->
 <view class="trip">
-  <p class="product-feature-title">行程详情</p>
-  <view class="trip-item" wx:for="{{tripItemData}}" wx:key="index">
+  <view class="product-feature-title">行程详情</view>
+  <view class="trip-item" wx:for="{{tripItemData}}" wx:key="{{index}}">
     <view class="tip-top">
       <view class="trip-date">第{{item.dayNo}}天</view>
       <view class="trip-title base_blue">{{item.title}}</view>
     </view>
     <view class="food">
-      <p class="trip-text-title">
-        <i class="icon iconfont icon-canyin trip-icon"></i>餐饮：</p>
-      <p class="trip-text">早餐：{{item.breakfast}}</p>
-      <p class="trip-text">午餐：{{item.lunch}}</p>
-      <p class="trip-text">晚餐：{{item.dinner}}</p>
+      <view class="trip-text-title">
+        <text class="icon iconfont icon-canyin trip-icon"></text>餐饮：</view>
+      <view class="trip-text">早餐：{{item.breakfast}}</view>
+      <view class="trip-text">午餐：{{item.lunch}}</view>
+      <view class="trip-text">晚餐：{{item.dinner}}</view>
     </view>
     <view>
-      <p class="trip-text-title">
-        <i class="icon iconfont icon-zhusu trip-icon"></i>住宿：{{item.hotel}} </p>
+      <view class="trip-text-title">
+        <text class="icon iconfont icon-zhusu trip-icon"></text>住宿：{{item.hotel}} </view>
     </view>
     <view>
-      <p class="trip-text-title-traffic">
-        <i class="icon iconfont icon-jiaotong trip-icon"></i>交通：</p>
-      <p class="trip-text">{{item.flight}}</p>
+      <view class="trip-text-title-traffic">
+        <text class="icon iconfont icon-jiaotong trip-icon"></text>交通：</view>
+      <view class="trip-text">{{item.flight}}</view>
     </view>
     <view class="trip-detailed">
       <view wx:if="{{item.showDetailed}}" class="trip-detailed-label">详细行程</view>
       <rich-text wx:if="{{item.showDetailed}}" class="trip-detailed-content rich-text" nodes="{{item.details}}"></rich-text>
       <view bindtap="showDetailFn" data-index="{{index}}" class="trip-detailed-btn">
         详细行程
-        <i wx:if="{{item.showDetailed}}" class="icon iconfont icon-shang-copy"></i>
-        <i wx:else class="icon iconfont icon-xiala"></i>
+        <text wx:if="{{item.showDetailed}}" class="icon iconfont icon-shang-copy"></text>
+        <text wx:else class="icon iconfont icon-xiala"></text>
       </view>
     </view>
   </view>

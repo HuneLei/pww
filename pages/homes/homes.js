@@ -1,63 +1,57 @@
 import apiHome from '../../api/home';
 import convert from '../../utils/convert';
 
-// pages/homes/homes.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     page: 0,
     size: 10,
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
+    toView: '',
+    wheight: "",
+    backshow: false,
     requestLoading: false, //"上拉加载"的变量，默认false，隐藏
     requestLoadingComplete: false, //“没有数据”的变量，默认false，隐藏
     dataList: [],
     baseList: [{
-        url: '',
-        img: '../../assets/img/banner/banner01.png',
-      },
-      {
-        url: '',
-        img: '../../assets/img/banner/banner02.png',
-      },
-      {
-        url: '',
-        img: '../../assets/img/banner/banner03.png',
-      },
-      {
-        url: '',
-        img: '../../assets/img/banner/banner04.png',
-      },
+      url: '',
+      img: '../../assets/img/banner/banner01.png',
+    },
+    {
+      url: '',
+      img: '../../assets/img/banner/banner02.png',
+    },
+    {
+      url: '',
+      img: '../../assets/img/banner/banner03.png',
+    },
+    {
+      url: '',
+      img: '../../assets/img/banner/banner04.png',
+    },
     ],
     tabList: [{
-        icon: 'icon iconfont icon-zhoubianyou',
-        iconbg: 'a-bg',
-        title: '跟团游',
-        type: 1,
-      },
-      {
-        icon: 'icon iconfont icon-guonei',
-        iconbg: 'g-bg',
-        title: '自由行',
-        type: 2,
-      },
-      {
-        icon: 'icon iconfont icon-chanpinfenleizhoubianyou',
-        iconbg: 'l-bg',
-        title: '周边游',
-        type: 3,
-      },
-      {
-        icon: 'icon iconfont icon-lvyou7',
-        iconbg: 'h-bg',
-        title: '一日游',
-        type: 4,
-      },
+      icon: 'icon iconfont icon-zhoubianyou',
+      iconbg: 'a-bg',
+      title: '跟团游',
+      type: 1,
+    },
+    {
+      icon: 'icon iconfont icon-guonei',
+      iconbg: 'g-bg',
+      title: '自由行',
+      type: 2,
+    },
+    {
+      icon: 'icon iconfont icon-chanpinfenleizhoubianyou',
+      iconbg: 'l-bg',
+      title: '周边游',
+      type: 3,
+    },
+    {
+      icon: 'icon iconfont icon-lvyou7',
+      iconbg: 'h-bg',
+      title: '一日游',
+      type: 4,
+    },
     ],
   },
   // tap链接
@@ -65,6 +59,24 @@ Page({
     let type = e.currentTarget.dataset.type
     wx.navigateTo({
       url: '/pages/follows/follows?type=' + type
+    })
+  },
+  // 滚动触发
+  bindscroll(e) {
+    if (e.detail.scrollTop > 500) {
+      this.setData({
+        backshow: true
+      })
+    } else {
+      this.setData({
+        backshow: false
+      })
+    }
+  },
+  // 回到顶部
+  backhead() {
+    this.setData({
+      toView: 'page_home',
     })
   },
   // 为你推荐产品列表
@@ -92,14 +104,15 @@ Page({
       }
     })
   },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-    this.setData({
-      requestLoading: true,
-      requestLoadingComplete: false
-    });
+
+  // 页面上拉触底事件的处理函数
+  bindscrolltolower() {
+    if (!this.data.requestLoadingComplete) {
+      this.setData({
+        requestLoading: true,
+        requestLoadingComplete: false
+      });
+    }
     this.infiniteHandler();
   },
 
@@ -111,52 +124,12 @@ Page({
     }
     return url;
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
+  // 生命周期函数--监听页面加载
+  onLoad: function (options) {
     this.infiniteHandler();
+    this.setData({
+      wheight: `height: ${wx.getStorageSync('SystemInfo').windowHeight}px;`,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

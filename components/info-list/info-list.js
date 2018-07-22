@@ -8,9 +8,6 @@ Component({
       value: null,
     },
   },
-  /**
-   * 页面的初始数据
-   */
   data: {
     travalType: baseSelect.travalType,
     travalTypeColor: baseSelect.travalTypeColor,

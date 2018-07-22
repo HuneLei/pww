@@ -16,7 +16,7 @@ Component({
   methods: {
     showDetailFn(e) {
       let index = e.currentTarget.dataset.index;
-      let dataList = this.data.tripItemData
+      let dataList = this.data.tripItemData;
       dataList[index].showDetailed = !dataList[index].showDetailed;
       this.setData({
         tripItemData: dataList

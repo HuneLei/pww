@@ -9,6 +9,13 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+// 显示自定义提示
+var showTitle = text => wx.showToast({
+  title: text,
+  icon: 'none',
+  duration: 500
+})
+
 // 显示繁忙提示
 var showBusy = text => wx.showToast({
   title: text,
@@ -46,6 +53,7 @@ const formatNumber = n => {
 
 module.exports = {
   formatTime,
+  showTitle,
   showBusy,
   showSuccess,
   showModel

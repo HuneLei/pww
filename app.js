@@ -3,7 +3,7 @@ import login from './api/login';
 import utils from './utils/util';
 
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     // 尝试登录获取code信息
     login.getWxLoginResult((wxLoginError, wxLoginResult) => {
       if (wxLoginError) {
@@ -15,12 +15,9 @@ App({
 
     //获取系统信息
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         wx.setStorageSync('SystemInfo', res);
       }
     })
   },
-  globalData: {
-    userInfo: null
-  }
 })

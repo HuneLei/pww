@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "首页",
   "usingComponents": {
     "info-list": "/components/info-list/info-list"
   }

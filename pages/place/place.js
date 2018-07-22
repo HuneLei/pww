@@ -1,5 +1,6 @@
 import InitData from '../../utils/InitData';
-import convert from '../../utils/convert'
+import convert from '../../utils/convert';
+import utils from '../../utils/util';
 import apiArea from '../../api/area';
 
 Page({
@@ -8,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    scrollitem: '',
+    windowHeight: "",
     allHeight: "",
     cityListHeight: "",
     inputShowed: false,
@@ -19,7 +22,7 @@ Page({
     hotList: [{
       id: 2,
       label: '深圳',
-    }, ],
+    },],
     historyList: ['北京', '保定'],
     cityList: [],
     type: null, // 产品类型
@@ -65,23 +68,23 @@ Page({
   },
 
   // 搜索事件
-  showInput: function() {
+  showInput: function () {
     this.setData({
       inputShowed: true
     });
   },
-  hideInput: function() {
+  hideInput: function () {
     this.setData({
       inputVal: "",
       inputShowed: false
     });
   },
-  clearInput: function() {
+  clearInput: function () {
     this.setData({
       inputVal: ""
     });
   },
-  inputTyping: function(e) {
+  inputTyping: function (e) {
     this.setData({
       inputVal: e.detail.value
     });
@@ -92,18 +95,18 @@ Page({
     console.log(e.currentTarget.dataset.item);
     let item = e.currentTarget.dataset.item;
     if (item !== 'search-input' && item !== 'current' && item !== 'history' && item !== 'hot') {
-      this.$vux.toast.text(item, 'middle');
+      utils.showTitle(item);
     }
-    // const name = document.getElementById(item);
-    // if (name) {
-    //   name.scrollIntoView();
-    // }
+    if (item) {
+      this.setData({
+        scrollitem: item,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    console.log(wx.getStorageSync('SystemInfo').screenHeight)
+  onLoad: function (options) {
     if (options.type) {
       this.setData({
         type: options.type
@@ -115,8 +118,9 @@ Page({
       })
     }
     this.setData({
+      windowHeight: `height: ${wx.getStorageSync('SystemInfo').windowHeight}px;`,
       allHeight: `height: ${wx.getStorageSync('SystemInfo').windowHeight - 40}px;`,
-      cityListHeight: `height: ${wx.getStorageSync('SystemInfo').windowHeight - 30}px; overflow-y: auto;`
+      cityListHeight: `height: ${wx.getStorageSync('SystemInfo').windowHeight - 30}px;`
     })
     this.init();
     this.cityListFn();
@@ -125,49 +129,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

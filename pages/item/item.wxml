@@ -1,187 +1,192 @@
-<scroll-view style='{{sysHeight}}' scroll-y scroll-into-view="{{intoView}}">
-  <view class="bg" id='red'>
-    <!-- 首页入口 -->
-    <view class="back-home" bindtap="backHome">
-      <i class="icon iconfont icon-shouye back-home-icon"></i>
-    </view>
-    <!-- 轮播图 -->
-    <view class="swiper-box" id="top">
-      <swiper class="product-swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#d0cdd1" indicator-active-color="#04BE02">
-        <block wx:for="{{swiperImg}}" wx:key="{{index}}">
-          <swiper-item>
-            <image mode='scaleToFill' src="{{item.img}}" style='width:100%;height:450rpx' />
-          </swiper-item>
-        </block>
-      </swiper>
-      <view class="swiper-label">
-        <view>产品编号：{{productItem.productNo}}</view>
-        <view>{{productItem.cityName}}出发</view>
+<view class="pages_view">
+  <scroll-view style='{{sysHeight}}' scroll-y scroll-into-view="{{intoView}}" bindscroll="bindscroll">
+    <view class="pages_item" id='pages_item'>
+      <!-- 首页入口 -->
+      <view class="back-home" bindtap="backHome">
+        <i class="icon iconfont icon-shouye back-home-icon"></i>
+      </view>
+      <!-- 轮播图 -->
+      <view class="swiper-box" id="top">
+        <swiper class="product-swiper" indicator-dots autoplay circular interval="5000" duration="1000" indicator-color="#d0cdd1" indicator-active-color="#04BE02">
+          <block wx:for="{{swiperImg}}" wx:key="{{index}}">
+            <swiper-item>
+              <image src="{{item.img}}" style='width:100%;height:460rpx' />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="swiper-label">
+          <view>产品编号：{{productItem.productNo}}</view>
+          <view>{{productItem.cityName}}出发</view>
+        </view>
+      </view>
+
+      <!-- 产品信息 -->
+      <view class="info-box">
+        <view class="info-title">{{productItem.name}}</view>
+        <view class="info-num">
+          <view class="base_orange">
+            <text class="base-money">￥{{productItem.minGroupSinglePrice}}</text>
+            <text class="base_gray_little"> 起/人</text>
+          </view>
+          <view>
+            <text>{{productItem.groupMinOrder}}人拼团</text>
+          </view>
+        </view>
       </view>
     </view>
 
-    <!-- 产品信息 -->
-    <view class="info-box">
-      <view class="info-title">{{productItem.name}}</view>
-      <view class="info-num">
-        <view class="base_orange">
-          <span class="base-money">￥{{productItem.minGroupSinglePrice}}</span>
-          <span class="base_gray_little">起/人</span>
-        </view>
-        <view>
-          <span style="margin-left: 20rpx;">{{productItem.groupMinOrder}}人拼团</span>
-        </view>
+    <!-- 正在拼团 - 滚动 -->
+    <view class="collage-box" wx:if="{{collageNum}}">
+      <view class="collage-title">
+        <span>
+          <i class="icon iconfont icon-pintuan base_blue"></i>
+          {{collageNum}}人正在拼团，可直接参与
+        </span>
+        <span class="base_gray" bindtap="moreCollage">查看更多
+          <i class="icon iconfont icon-left-arrow righr-icon"></i>
+        </span>
       </view>
-    </view>
-  </view>
-
-  <!-- 正在拼团 - 滚动 -->
-  <view class="collage-box" wx:if="{{collageNum}}">
-    <view class="collage-title">
-      <span>
-        <i class="icon iconfont icon-pintuan base_blue"></i>
-        {{collageNum}}人正在拼团，可直接参与
-      </span>
-      <span class="base_gray" bindtap="moreCollage">查看更多
-        <i class="icon iconfont icon-left-arrow righr-icon"></i>
-      </span>
-    </view>
-    <view class="collage-swiper">
-      <swiper style="height: {{collageNum > 1?'260rpx': '120rpx'}}" autoplay interval="3000" duration="{{duration}}" indicator-color="#d0cdd1" indicator-active-color="#04BE02" vertical='true'>
-        <block wx:for="{{collageList}}" wx:key="{{index}}">
-          <swiper-item>
-            <view class="coolage-item" wx:for="{{item}}" wx:key="i">
-              <view class="collage-img">
-                <image class="headImg" src="{{item.headImgUrl}}"></image>
-                <text style='font-size:24rpx'>{{item.name}}</text>
-              </view>
-              <view class="collage-right">
-                <view>
-                  <view>还差
-                    <span class="base_orange">{{item.orderNum}}</span>人拼团</view>
-                  <view class="base_gray_little" style="margin-top: 5px">
-                    <count-down-time time="{{item.orderTime}}"></count-down-time>
+      <view class="collage-swiper">
+        <swiper style="height: {{collageNum > 1?'260rpx': '120rpx'}}" autoplay interval="3000" duration="{{duration}}" indicator-color="#d0cdd1" indicator-active-color="#04BE02" vertical='true'>
+          <block wx:for="{{collageList}}" wx:key="{{index}}">
+            <swiper-item>
+              <view class="coolage-item" wx:for="{{item}}" wx:key="i">
+                <view class="collage-img">
+                  <image class="headImg" src="{{item.headImgUrl}}"></image>
+                  <text style='font-size:24rpx'>{{item.name}}</text>
+                </view>
+                <view class="collage-right">
+                  <view>
+                    <view>还差
+                      <span class="base_orange">{{item.orderNum}}</span>人拼团</view>
+                    <view class="base_gray_little" style="margin-top: 5px">
+                      <count-down-time time="{{item.orderTime}}"></count-down-time>
+                    </view>
+                  </view>
+                  <view class="collage-btn base_orange_bg">
+                    {{ item.isMarst ? '已参与' : '去拼团'}}
                   </view>
                 </view>
-                <view class="collage-btn base_orange_bg">
-                  {{ item.isMarst ? '已参与' : '去拼团'}}
-                </view>
               </view>
-            </view>
-          </swiper-item>
-        </block>
-      </swiper>
-      <!-- 正在拼团-更多 -->
-      <!-- <i-modal visible="false" bind:ok="handleClose1" bind:cancel="handleClose1"> -->
-      <!-- <view class="more-collage-title">正在拼团</view> -->
-      <!-- </i-modal> -->
-      <!-- 正在拼团-去拼团 -->
-      <!-- 出行时间 -->
-      <view class="time">
-        <view class="time-title">
-          <view>
-            <i class="icon iconfont icon-msnui-time base_blue"></i> 出行时间</view>
-        </view>
-        <view class="time-box">
-          <view class="time-item-box">
-            <view wx:for="{{timeList}}" wx:key="{{index}}">
-              <view bindtap='selectDatePrice' data-item="{{item}}" class="time-item {{item.date === weekSelectDate ? 'week-select' : ''}}">
-                <view>{{item.ndate}}</view>
-                <view class="mar-ptice">
-                  <text class="base_orange">¥{{item.groupSinglePrice}}</text> 起</view>
-                <view>余
-                  <text style="color: red">{{item.stockQty}}</text>
-                </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+    <!-- 正在拼团-更多 -->
+    <!-- <i-modal visible="false" bind:ok="handleClose1" bind:cancel="handleClose1"> -->
+    <!-- <view class="more-collage-title">正在拼团</view> -->
+    <!-- </i-modal> -->
+    <!-- 正在拼团-去拼团 -->
+    <!-- 出行时间 -->
+    <view class="time">
+      <view class="time-title">
+        <text class="icon iconfont icon-msnui-time base_blue base_icon"></text>
+        <text>出行时间</text>
+      </view>
+      <view class="time-box">
+        <view class="time-item-box">
+          <view wx:for="{{timeList}}" wx:key="{{index}}">
+            <view bindtap='selectDatePrice' data-item="{{item}}" class="time-item {{item.date === weekSelectDate ? 'week-select' : ''}}">
+              <view>{{item.ndate}}</view>
+              <view class="mar-ptice">
+                <text class="base_orange">¥{{item.groupSinglePrice}}</text> 起</view>
+              <view>余
+                <text style="color: red;font-size:28rpx;">{{item.stockQty}}</text>
               </view>
             </view>
           </view>
-          <view class="more-time">
-            <view>
-              <i class="icon iconfont icon-date"></i>
-            </view>
-            <view>更多日期</view>
-          </view>
         </view>
-      </view>
-      <!-- 商家信息 -->
-      <view class="business">
-        <view class="business-left">
-          <image class="headImg" src="{{shopLogo}}" alt=""> </image>
+        <view class="more-time" bindtap='toMoreDate'>
           <view>
-            <view>{{productItem.shopName}}
-              <span class="is-verified base_orange" wx:if="{{productItem.isVerified === 1}}">
-                <i class="icon iconfont icon-renzheng1"></i>
-                商家
-              </span>
-              <span class="is-verified base_blue" wx:if="{{productItem.isVerified === 2}}">
-                <i class="icon iconfont icon-renzheng1"></i>
-                个人
-              </span>
-            </view>
-            <view class="business-name">{{productItem.enterpriseName}}</view>
+            <text class="icon iconfont icon-date"></text>
           </view>
+          <view>更多日期</view>
         </view>
       </view>
-      <!-- 底部购买按钮 -->
-      <view class="footer">
-        <view class="footer-tel">
-          <a href="tel://13631270574" style="color: #333333">
-            <i class="icon iconfont icon-icon"></i>
-            <view>电话咨询</view>
-          </a>
-        </view>
-        <view class="footer-tel">
-          <i class="icon iconfont icon-yijianfankui"></i>
-          <view>在线咨询</view>
-        </view>
-        <view class="footer-single" bindtap='goBuy' data-type="1">
-          <view style="font-size: 16px;">¥{{singlePrice}}</view>
-          <view>单独购买</view>
-        </view>
-        <view class="footer-double base_orange_bg">
-          <view style="font-size: 16px;">¥{{groupPrice}}</view>
-          <view>发起拼团</view>
+    </view>
+    <!-- 商家信息 -->
+    <view class="business">
+      <view class="business-left">
+        <image class="headImg" src="{{shopLogo}}"> </image>
+        <view>
+          <view>{{productItem.shopName || ""}}
+            <text class="is-verified base_orange" wx:if="{{productItem.shopType === 1}}">
+              <text class="icon iconfont icon-renzheng1"></text> 商家
+            </text>
+            <text class="is-verified base_blue" wx:if="{{productItem.shopType === 0}}">
+              <text class="icon iconfont icon-renzheng1"></text> 个人
+            </text>
+          </view>
+          <view class="business-name">{{productItem.enterpriseName || ""}}</view>
         </view>
       </view>
-      <!-- 产品信息-tab页切换 -->
-      <view class="tab-box">
+    </view>
+    <!-- 底部购买按钮 -->
+    <view class="footer">
+      <view class="footer-tel">
+        <text class="icon iconfont icon-icon"></text>
+        <view>电话咨询</view>
+      </view>
+      <view class="footer-tel">
+        <text class="icon iconfont icon-yijianfankui"></text>
+        <view>在线咨询</view>
+      </view>
+      <view class="footer-single" bindtap='goBuy' data-type="1">
+        <view style="font-size: 34rpx;">¥ {{singlePrice}}</view>
+        <view style='margin-top: -6rpx;'>单独购买</view>
+      </view>
+      <view class="footer-double base_orange_bg">
+        <view style="font-size: 34rpx;">¥ {{groupPrice}}</view>
+        <view style='margin-top: -6rpx;'>发起拼团</view>
+      </view>
+    </view>
+    <!-- 产品信息-tab页切换 -->
+    <view class="tab-box">
+      <view class="weui-tab">
         <view class="weui-navbar">
-          <block wx:for="{{tabs}}" wx:key="*this">
+          <block wx:for="{{tabs}}" wx:key="{{index}}">
             <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
               <view class="weui-navbar__title">{{item}}</view>
             </view>
           </block>
-          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+          <view class="weui-navbar__slider" style="width:{{100 / tabs.length}}% ;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <!-- 产品特色 -->
-        <view class="product-feature" id="product-feature">
-          <text class="product-feature-title">产品特色</text>
-          <rich-text class="rich-text" nodes="{{productItem.productFeature}}" bindtap="tap"></rich-text>
+      </view>
+      <!-- 产品特色 -->
+      <view class="product-feature" id="product-feature">
+        <view class="product-feature-title">产品特色</view>
+        <rich-text class="rich-text" nodes="{{productItem.productFeature}}"></rich-text>
+      </view>
+      <!-- 行程详情 -->
+      <view id="trip-item">
+        <trip-item tripItemData="{{tripItemData}}"></trip-item>
+      </view>
+      <!-- 费用说明 -->
+      <view class="cost" id="cost">
+        <view class="product-feature-title">费用说明</view>
+        <view>
+          <view class="lc-title">费用包含：</view>
+          <rich-text class='rich_text' nodes="{{priceTemplateOne}}"></rich-text>
+          <view class="lc-title">费用不包含：</view>
+          <rich-text class='rich_text' nodes="{{priceTemplateTwo}}"></rich-text>
         </view>
-        <!-- 行程详情 -->
-        <view id="trip-item">
-          <trip-item tripItemData="{{tripItemData}}"></trip-item>
-        </view>
-        <!-- 费用说明 -->
-        <view class="cost" id="cost">
-          <p class="product-feature-title">费用说明</p>
-          <view>
-            <p class="lc-title">费用包含：</p>
-            <p>{{priceTemplateOne}}</p>
-            <p class="lc-title">费用不包含：</p>
-            <p>{{priceTemplateTwo}}</p>
-          </view>
-        </view>
-        <!-- 预定须知 -->
-        <view class="destine" id="destine" style="margin-bottom: 60px;">
-          <p class="product-feature-title">预定须知</p>
-          <view>
-            <p class="lc-title">预订须知：</p>
-            <p>{{reserveTemplateOne}}</p>
-            <p class="lc-title">签证信息:</p>
-            <p>{{reserveTemplateTwo}}</p>
-          </view>
+      </view>
+      <!-- 预定须知 -->
+      <view class="destine" id="destine" style="padding-bottom:160rpx;">
+        <view class="product-feature-title">预定须知</view>
+        <view>
+          <view class="lc-title">预订须知：</view>
+          <rich-text class='rich_text' nodes="{{reserveTemplateOne}}"></rich-text>
+          <view class="lc-title">签证信息:</view>
+          <rich-text class='rich_text' nodes="{{reserveTemplateTwo}}"></rich-text>
         </view>
       </view>
     </view>
-  </view>
-</scroll-view>
+    <!-- 回到顶部 -->
+    <view class="back_head" bindtap='backhead' wx:if="{{backshow}}" id="back_tops">
+      <image src='../../assets/img/back3.png'></image>
+      <view>顶部</view>
+    </view>
+  </scroll-view>
+</view>

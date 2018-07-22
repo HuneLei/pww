@@ -1,17 +1,16 @@
-// pages/item/item.js
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+
 import apiHome from '../../api/home';
 import apiOrder from '../../api/order';
 import convert from '../../utils/convert';
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    backshow: false,
     tabs: ["产品特色", "行程详情", "费用说明", "预定须知"],
     sysHeight: '',
     activeIndex: 0,
+    sliderOffset: 0,
     intoView: '',
     featureList: ['product-feature', 'trip-item', 'cost', 'destine'],
     sliderOffset: 0,
@@ -69,11 +68,6 @@ Page({
     weekSelectDate: null, // 选中的周
     url: null,
     dateorderid: null, // 价格日历中的订单标识
-    indicatorDots: true,
-    autoplay: false,
-    circular: false,
-    interval: 5000,
-    duration: 1000,
     // templateId: null
     templateId: 6
   },
@@ -90,6 +84,8 @@ Page({
     apiHome.item(id, 1).then((res) => {
       if (res.data.code === 0) {
         const data = res.data.result;
+        // document.title = res.data.result.name || '产品详情';
+        data.productFeature = data.productFeature.replace(/\<img/gi, '<img style="max-width:100%;height:auto"'); // 使图片自适应
         this.setData({
           productItem: res.data.result,
           priceTemplateId: res.data.result.priceTemplateId,
@@ -98,8 +94,10 @@ Page({
           swiperImg: this.toArr(res.data.result.logo), // 轮播图
           singlePrice: res.data.result.minSinglePrice, // 底部单独购买价格
           groupPrice: res.data.result.minGroupSinglePrice, // 底部单独购买价格
+          productFeature: data.productFeature,
         })
-        const link = `${getCurrentPages().route}?id=${this.data.ID}`;
+        // 微信自定义分享
+        // const link = `${getCurrentPages().route}?id=${this.data.ID}`;
         this.CollageingFn(); // 正在拼团
         // console.log(link);
         // const productImg = this.toHeadImg(res.data.result.logo);
@@ -130,7 +128,8 @@ Page({
         this.setData({
           collageList: collList
         })
-        this.calendarListFn(7, 'week'); // 周价格表
+        // this.calendarListFn(7, 'week'); // 周价格表
+        this.calendarListFn(this.data.ID, 'week'); // 周价格表
       }
     });
   },
@@ -141,6 +140,7 @@ Page({
         let dataList = res.data.result;
         for (let i = 0; i < dataList.length; i += 1) {
           dataList[i].showDetailed = false;
+          dataList[i].details = dataList[i].details.replace(/\<img/gi, '<img style="max-width:100%;height:auto"'); // 使图片自适应
         }
         this.setData({
           tripItemData: dataList
@@ -151,11 +151,14 @@ Page({
   // 费用说明
   priceTemplateFn(templateId) {
     apiHome.explain(templateId).then((res) => {
+      let priceTemplateOne = this.changeText(res.data.result.explainOne);
+      let priceTemplateTwo = this.changeText(res.data.result.explainTwo)
       if (res.data.code === 0) {
         this.setData({
-          priceTemplateOne: res.data.result.explainOne,
-          priceTemplateTwo: res.data.result.explainTwo
+          priceTemplateOne,
+          priceTemplateTwo,
         })
+        console.log('priceTemplateOne', this.data.priceTemplateOne)
         this.reserveTemplateFn(this.data.reserveTemplateId); // 须知模板
       }
     });
@@ -185,12 +188,21 @@ Page({
     apiHome.explain(templateId).then((res) => {
       if (res.data.code === 0) {
         this.setData({
-          reserveTemplateOne: res.data.result.explainOne,
-          reserveTemplateTwo: res.data.result.explainTwo
+          reserveTemplateOne: this.changeText(res.data.result.explainOne),
+          reserveTemplateTwo: this.changeText(res.data.result.explainTwo),
         })
-        this.agendaItemFn(7) // 行程信息
+        // this.agendaItemFn(7) // 行程信息
+        this.agendaItemFn(this.data.ID) // 行程信息
       }
     });
+  },
+  changeText(val) {
+    const arr = val.split('\n');
+    let arrItems = null;
+    for (let i = 0; i < arr.length; i += 1) {
+      arrItems = arrItems ? `${arrItems}<p>${arr[i]}</p>` : `<p>${arr[i]}</p>`;
+    }
+    return arrItems;
   },
   // 轮播图转换
   toArr(arr) {
@@ -227,7 +239,7 @@ Page({
     return convert.weekDate(str);
   },
   // 更多拼团
-  moreCollage: function () {
+  moreCollage: function() {
 
   },
   // 点击底部按钮 type：1: 单独购买, 2:拼团 4: 参与拼团
@@ -239,31 +251,67 @@ Page({
   },
 
   //返回首页
-  backHome: function () {
+  backHome: function() {
     wx.switchTab({
-      url: '/pages/home/home',
+      url: '/pages/homes/homes',
+    })
+  },
+  // 滚动触发
+  bindscroll(e) {
+    if (e.detail.scrollTop > 500) {
+      this.setData({
+        backshow: true
+      })
+    } else {
+      this.setData({
+        backshow: false
+      })
+    }
+  },
+  // 回到顶部
+  backhead() {
+    this.setData({
+      intoView: 'top',
+    })
+  },
+
+  // 跟多日期
+  toMoreDate() {
+    wx.navigateTo({
+      url: '/pages/date/date?id=' + this.data.ID + '&shopPhone=' + this.data.productItem.shopPhone + '&shopId=' + this.data.productItem.shopId,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if (!options.id) {
+  onLoad: function(options) {
+    console.log(options.id)
+    // options.id = 24;
+    if (options.id) {
       this.setData({
-        // ID: options.id,
-        ID: 7,
-        userInfo: {
-
-        },
+        ID: options.id,
+        // ID: 7,
+        userInfo: {},
         groupForm: {
-          // productId: options.id,
-          productId: 7,
+          productId: options.id,
+          // productId: 7,
           status: 1,
           beginTime: convert.groupDateSlot().old,
           beginTendTimeime: convert.groupDateSlot().now,
-        }
+        },
+        sysHeight: `height: ${wx.getStorageSync('SystemInfo').windowHeight}px;`, // 计算主体部分高度,单位为px
       })
-      this.dataItem(7);
+      var that = this;
+      wx.getSystemInfo({
+        success: function(res) {
+          that.setData({
+            sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+            sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          });
+        }
+      });
+      this.dataItem(options.id);
+      // this.dataItem(7);
       // this.CollageingFn(); // 正在拼团
     }
   },
@@ -271,58 +319,47 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res);
-        // 计算主体部分高度,单位为px
-        that.setData({
-          sysHeight: `height: ${res.windowHeight}px;`
-        })
-      }
-    });
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
