@@ -1,17 +1,17 @@
 /* pages/date/data.wxss */
 
 .headdate {
-  height: 30px;
+  height: 60rpx;
   background-color: white;
   flex: 1;
   text-align: center;
-  line-height: 30px;
+  line-height: 60rpx;
 }
 
 .headbox {
   /* display: flex; */
   display: -webkit-flex;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 2rpx solid #e5e5e5;
 }
 
 .headbox2 {
@@ -75,7 +75,7 @@
   position: absolute;
   font-size: 22rpx;
   bottom: -20rpx;
-  width: 107rpx;
+  width: 116rpx;
   text-align: center;
   font-weight: 500;
 }
@@ -85,7 +85,7 @@
   position: absolute;
   font-size: 22rpx;
   bottom: 40rpx;
-  width: 107rpx;
+  width: 100rpx;
   text-align: center;
   font-weight: 500;
 }
@@ -115,6 +115,7 @@
 
 .weui-navbar__slider {
   background-color: #0ae;
+  width: 5.5em;
 }
 
 .item_money {
@@ -191,4 +192,72 @@
 
 .hand-price-an {
   background-color: red;
+}
+
+/* 底部按钮 */
+
+.footer {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  text-align: center;
+  z-index: 1009;
+}
+
+.footer-tel {
+  width: 20%;
+  color: #333;
+  background-color: #eaeaea;
+  padding: 10rpx 0;
+}
+
+.footer-tel text {
+  font-size: 40rpx;
+}
+
+.footer-tel view {
+  font-size: 28rpx;
+  margin-top: -10rpx;
+}
+
+.footer-single {
+  width: 25%;
+  color: white;
+  background-color: #0ae;
+  padding: 10rpx 0;
+  font-size: 34rpx;
+}
+
+.footer-double {
+  width: 35%;
+  color: white;
+  padding: 10rpx 0;
+  font-size: 34rpx;
+}
+
+.single {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  color: white;
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #a2a2a2;
+  margin-right: 6rpx;
+  margin-left: -50rpx;
+}
+
+.group {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  color: white;
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #ff7300;
+  margin-right: 6rpx;
+  margin-left: 20rpx;
 }

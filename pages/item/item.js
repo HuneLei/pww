@@ -158,7 +158,6 @@ Page({
           priceTemplateOne,
           priceTemplateTwo,
         })
-        console.log('priceTemplateOne', this.data.priceTemplateOne)
         this.reserveTemplateFn(this.data.reserveTemplateId); // 须知模板
       }
     });
@@ -235,19 +234,22 @@ Page({
       reserveTime: convert.convertDate(item.date),
     });
   },
+  // 点击底部按钮 type：1: 单独购买, 2:拼团 4: 参与拼团
+  goBuy(e) {
+    console.log(e.currentTarget.dataset.type)
+    let buyType = e.currentTarget.dataset.type
+    this.data.allPrice = 0;
+    wx.navigateTo({
+      url: '/pages/date/date?id=' + this.data.ID + '&shopPhone=' + this.data.productItem.shopPhone + '&shopId=' + this.data.productItem.shopId + '&type=' + buyType + '&reserveTime=' + this.data.reserveTime + '&dateorderid=' + this.data.dateorderid,
+    })
+    // this.type = type;
+  },
   toWeekDate(str) {
     return convert.weekDate(str);
   },
   // 更多拼团
   moreCollage: function() {
 
-  },
-  // 点击底部按钮 type：1: 单独购买, 2:拼团 4: 参与拼团
-  goBuy(e) {
-    console.log(e)
-    this.data.showMoreDate = true;
-    this.data.type = e.currentTarget.dataset.type;
-    this.data.allPrice = 0;
   },
 
   //返回首页
@@ -278,15 +280,17 @@ Page({
   // 跟多日期
   toMoreDate() {
     wx.navigateTo({
-      url: '/pages/date/date?id=' + this.data.ID + '&shopPhone=' + this.data.productItem.shopPhone + '&shopId=' + this.data.productItem.shopId,
+      url: '/pages/date/date?id=' + this.data.ID + '&shopPhone=' + this.data.productItem.shopPhone + '&shopId=' + this.data.productItem.shopId + '&type=' + -1,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.id)
-    // options.id = 24;
+    options.id = 23;
+    if (options.dateorderid) {
+      dateorderid: options.dateorderid
+    }
     if (options.id) {
       this.setData({
         ID: options.id,

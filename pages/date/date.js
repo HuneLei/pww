@@ -1,14 +1,16 @@
 // pages/date/data.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 import apiHome from '../../api/home';
+import convert from '../../utils/convert'
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    tabs: ["7月", "8月", "9月"],
+    ID: null,
+    typeId: 0,
+    shopId: null,
+    shopPhone: null,
+    userInfo: {},
+    reserveTime: null,
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -24,8 +26,10 @@ Page({
     childrenMore: "",
     warnShow: false,
     amount: 0,
+    amountone: 0,
     handlevalue1: 0,
     handlevalue2: 0,
+    footshow: 0, // 底部按钮显示选择
     handadult: {
       stockqty: 0,
       singlePrice: 0,
@@ -39,20 +43,20 @@ Page({
       warnShow: !this.data.warnShow,
     })
   },
-  tabClick: function(e) {
+  tabClick(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.dataset.index
     });
     this.calendarListFn(e.currentTarget.dataset.id);
   },
-  submitbtn: function() {
+  submitbtn: function(e) {
+    console.log(e.currentTarget.dataset.type)
     if (!this.data.amount) return
-    console.log(123)
   },
   // 产品详情
   dataItem() {
-    apiHome.item(14, 2).then((res) => {
+    apiHome.item(this.data.ID, 2).then((res) => {
       if (res.data.code === 0) {
         this.setData({
           childrenMore: res.data.result.childrenMore || '暂无'
@@ -66,7 +70,8 @@ Page({
       cMonth: (new Date()).getMonth() + 1,
     })
     const form = {
-      productId: 14,
+      // productId: 14,
+      productId: this.data.ID,
       type: 'march',
       year: this.data.cYear,
       month: this.data.cMonth,
@@ -91,7 +96,7 @@ Page({
           nomthNum,
         });
         this.tapCenter()
-        this.calendarListFn(7);
+        this.calendarListFn();
       }
     });
   },
@@ -101,7 +106,8 @@ Page({
   }) {
     this.setData({
       handlevalue1: detail.value,
-      amount: this.data.handadult.kidsPrice * this.data.handlevalue2 + this.data.handadult.singlePrice * detail.value
+      amount: this.data.handadult.kidsPrice * this.data.handlevalue2 + this.data.handadult.singlePrice * detail.value,
+      amountone: this.data.handadult.groupKidsPrice * this.data.handlevalue2 + this.data.handadult.groupSinglePrice * detail.value
     })
   },
   handleChangeTwo({
@@ -109,7 +115,8 @@ Page({
   }) {
     this.setData({
       handlevalue2: detail.value,
-      amount: this.data.handadult.kidsPrice * detail.value + this.data.handadult.singlePrice * this.data.handlevalue1
+      amount: this.data.handadult.kidsPrice * detail.value + this.data.handadult.singlePrice * this.data.handlevalue1,
+      amountone: this.data.handadult.groupKidsPrice * detail.value + this.data.handadult.groupSinglePrice * this.data.handlevalue1
     })
   },
   // tap标签居中显示
@@ -125,21 +132,98 @@ Page({
     });
   },
   // 月价格日历
-  calendarListFn(months) {
+  calendarListFn(month) {
+    // 预先选择好的时间判断
+    if (this.data.reserveTime) {
+      let SelectTime = (new Date(this.data.reserveTime.replace(/-/g, '/')));
+      let nowTime = (new Date()).getTime();
+      if (SelectTime.getTime() > nowTime) {
+        this.setData({
+          sYear: SelectTime.getFullYear(),
+          sMonth: SelectTime.getMonth() + 1
+        })
+        this.getTypePrice();
+      } else {
+        this.setData({
+          sYear: (new Date()).getFullYear(),
+          sMonth: (new Date()).getMonth() + 1
+        })
+        this.getDateday(month)
+      }
+    } else {
+      this.setData({
+        sYear: (new Date()).getFullYear(),
+        sMonth: (new Date()).getMonth() + 1
+      })
+      this.getDateday(month)
+    }
+  },
+
+  // 获取日历数据
+  getDateday(month) {
     const form = {
-      productId: 14,
+      // productId: 14,
+      productId: this.data.ID,
       type: 'month',
-      year: 2018,
-      month: months,
+      year: this.data.sYear,
+      month: month || this.data.sMonth,
     };
     let that = this;
     apiHome.calendarList(form).then((res) => {
       if (res.data.code === 0) {
         const data = res.data.result;
         this.dateData(data, form.month, that)
+        if (this.data.reserveTime) {
+          let e = {
+            currentTarget: {
+              dataset: {
+                indexs: Number(this.data.reserveTime.split('-')[2]) - 1,
+                stockqty: this.data.handadult.stockQty
+              }
+            }
+          }
+          this.sureBind(e)
+        }
       }
       this.dataItem();
     });
+  },
+
+  // 获取选择的价格
+  getTypePrice() {
+    const form = {
+      productId: this.data.ID,
+      type: 'day',
+      date: this.data.reserveTime,
+    };
+    apiHome.calendarList(form).then((res) => {
+      if (res.data.code === 0) {
+        const data = res.data.result[0];
+        data.isBefore = false;
+        data.date = convert.convertDate(data.date);
+        this.selectDate(data);
+        this.getDateday()
+      }
+    });
+  },
+
+  // 选中日期
+  selectDate(item) {
+    if (!item.isBefore && item.groupSinglePrice && item.stockQty > 0) {
+      this.setData({
+        handadult: {
+          groupKidsPrice: item.groupKidsPrice,
+          kidsPrice: item.kidsPrice,
+          groupSinglePrice: item.groupSinglePrice,
+          singlePrice: item.singlePrice,
+          stockQty: item.stockQty,
+        }
+        // selectItem: item
+      });
+      // this.selectItem.admit = this.roundSingleValue;
+      // this.selectItem.child = this.roundKidValue;
+      // this.$emit('more-date-result', this.selectItem);
+    }
   },
 
   // 点中选择事件
@@ -148,22 +232,23 @@ Page({
     let stockqty = e.currentTarget.dataset.stockqty;
     if (!stockqty) return
     if (this.data.selectNum == indexs) indexs = -1;
+    let handadult = {
+      stockqty: indexs == -1 ? 0 : this.data.date[0][indexs].stockqty,
+      singlePrice: indexs == -1 ? 0 : this.data.date[0][indexs].singlePrice,
+      groupSinglePrice: indexs == -1 ? 0 : this.data.date[0][indexs].groupSinglePrice,
+      groupKidsPrice: indexs == -1 ? 0 : this.data.date[0][indexs].groupKidsPrice,
+      kidsPrice: indexs == -1 ? 0 : this.data.date[0][indexs].kidsPrice,
+    }
     this.setData({
+      handadult,
       selectNum: indexs,
-      handadult: {
-        stockqty: indexs == -1 ? 0 : this.data.date[0][indexs].stockqty,
-        singlePrice: indexs == -1 ? 0 : this.data.date[0][indexs].singlePrice,
-        groupSinglePrice: indexs == -1 ? 0 : this.data.date[0][indexs].groupSinglePrice,
-        groupKidsPrice: indexs == -1 ? 0 : this.data.date[0][indexs].groupKidsPrice,
-        kidsPrice: indexs == -1 ? 0 : this.data.date[0][indexs].kidsPrice,
-      },
-      amount: this.data.date[0][indexs].kidsPrice * this.data.handlevalue2 + this.data.date[0][indexs].singlePrice * this.data.handlevalue1
+      amount: handadult.kidsPrice * this.data.handlevalue2 + handadult.singlePrice * this.data.handlevalue1,
+      amountone: handadult.groupKidsPrice * this.data.handlevalue2 + handadult.groupSinglePrice * this.data.handlevalue1
     })
-
   },
 
+  // 将获取的数据转换成日历格式
   dateData: function(res, mon, that) {
-    console.log('res', res)
     let dataAll = [] //总日历数据
     let dataAll2 = [] //总日历数据
     let dataMonth = [] //月日历数据
@@ -278,7 +363,6 @@ Page({
         dataAll2.push(dataAll[i]);
       }
     }
-    console.log('dataAll2', dataAll2)
     that.setData({
       date: dataAll2,
       weeks: weeks
@@ -289,6 +373,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options);
+    // let userInfo = wx.getStorageSync('wxLoginResult', wxLoginResult);
+    if (options.reserveTime) {
+      this.setData({
+        reserveTime: options.reserveTime
+      })
+    }
+    if (options.type == '-1') {
+      this.setData({
+        footshow: 1
+      })
+    } else {
+      this.setData({
+        footshow: 0
+      })
+    }
+    // footshow
+    this.setData({
+      ID: options.id,
+      typeId: options.type,
+      shopId: options.shopId,
+      shopPhone: options.shopPhone
+    })
     this.marchDate()
   },
 

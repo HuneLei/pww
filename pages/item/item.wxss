@@ -41,6 +41,7 @@
 }
 
 /* 产品特色 */
+
 .rich-text {
   font-size: 28rpx;
 }
@@ -180,6 +181,11 @@
 }
 
 /* 出行时间 */
+
+.mar-ptice {
+  font-size: 24rpx;
+  padding-top: 6rpx;
+}
 
 .time {
   background-color: white;
@@ -548,7 +554,8 @@
   background-color: #0ae;
 }
 
- /* 回到顶部 */
+/* 回到顶部 */
+
 .back_head {
   position: fixed;
   width: 85rpx;

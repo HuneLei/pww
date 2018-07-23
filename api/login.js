@@ -1,7 +1,7 @@
 import constants from '../utils/constants';
 import config from '../config.js';
 
-const loginUrl = `${config.apiHost}/weapp/login`
+const loginUrl = `${config.oauthHost}/wechat/login`
 /***
  * @class
  * 表示登录过程中发生的异常
@@ -25,6 +25,7 @@ const LoginError = (function() {
 const getWxLoginResult = (callback) => {
   wx.login({
     success: function(loginResult) {
+      console.log('loginResult', loginResult)
       callback(null, loginResult);
     },
     fail: function(loginError) {
@@ -56,6 +57,10 @@ const login = (options, callback) => {
     wx.request({
       url: loginUrl,
       header: header,
+      data: {
+        jsCode: code,
+        encryptedData: encryptedData
+      },
       method: 'GET',
       // data: options.data,
       success: (result) => {
@@ -86,20 +91,20 @@ const login = (options, callback) => {
     })
   }
   let session = config.Session.get();
-  if (session) {
-    // 检测是否是登录状态
-    wx.checkSession({
-      success: function() {
-        callback(session.userInfo, null)
-      },
-      fail: function() {
-        config.Session.clear();
-        SessionLogin();
-      },
-    });
-  } else {
-    SessionLogin();
-  }
+  // if (session) {
+  //   // 检测是否是登录状态
+  //   wx.checkSession({
+  //     success: function () {
+  //       callback(session.userInfo, null)
+  //     },
+  //     fail: function () {
+  //       config.Session.clear();
+  //       SessionLogin();
+  //     },
+  //   });
+  // } else {
+  SessionLogin();
+  // }
 }
 
 export default {

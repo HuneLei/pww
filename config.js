@@ -7,6 +7,8 @@ let tokenName = 'pww_token_' + constants.WX_TOKEN_NAME_ID;
 
 // 接口环境
 let apiHost = 'http://api.develop.iyaoling.com'; // 接口的基础地址
+// let oauthHost = 'http://oauth.develop.iyaoling.com'; // 用户信息接口的基础地址
+let oauthHost = 'http://172.18.166.127:8080'; // 用户信息接口的基础地址
 
 
 // 设置 当前用户的access_token
@@ -35,6 +37,7 @@ const Session = {
 
 export default {
   apiHost,
+  oauthHost,
   Session,  //  设置获取清除SESSION_KEY
   setToken, //  设置 当前用户的access_token
   getToken, //  获取 当前用户的access_token

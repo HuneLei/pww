@@ -31,27 +31,35 @@ Page({
   },
   // 获取用户信息
   bindgetuserinfo(e) {
+    return;
     if (this.data.isLogin) return;
     // util.showBusy('正在登录');
     var that = this;
     let userResult = e.detail;
     if (e.detail.userInfo) {
       let wxLoginResult = wx.getStorageSync('wxLoginResult');
-      apiLogin.login({
-        iv: userResult.iv,
-        code: wxLoginResult.code,
-        userInfo: userResult.userInfo,
-        encryptedData: userResult.encryptedData,
-      }, (userInfo, errorInfo) => {
-        if (errorInfo) {
-          util.showModel('请求失败', errorInfo)
+
+      apiLogin.getWxLoginResult((wxLoginError, wxLoginResult) => {
+        if (wxLoginError) {
+          utils.showModel('请求失败', wxLoginError)
           return;
-        }
-        // wx.hideLoading()
-        // that.setData({
-        //   userInfo: userInfo,
-        //   isLogin: true
-        // })
+        };
+        apiLogin.login({
+          iv: userResult.iv,
+          code: wxLoginResult.code,
+          userInfo: userResult.userInfo,
+          encryptedData: userResult.encryptedData,
+        }, (userInfo, errorInfo) => {
+          if (errorInfo) {
+            util.showModel('请求失败', errorInfo)
+            return;
+          }
+          // wx.hideLoading()
+          // that.setData({
+          //   userInfo: userInfo,
+          //   isLogin: true
+          // })
+        })
       })
     } else {
       wx.hideLoading()

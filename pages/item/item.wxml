@@ -90,7 +90,9 @@
             <view bindtap='selectDatePrice' data-item="{{item}}" class="time-item {{item.date === weekSelectDate ? 'week-select' : ''}}">
               <view>{{item.ndate}}</view>
               <view class="mar-ptice">
-                <text class="base_orange">¥{{item.groupSinglePrice}}</text> 起</view>
+                团<text class="base_orange">¥{{item.groupSinglePrice}}</text>
+                单<text>¥{{item.singlePrice}}</text>
+              </view>
               <view>余
                 <text style="color: red;font-size:28rpx;">{{item.stockQty}}</text>
               </view>
@@ -136,7 +138,7 @@
         <view style="font-size: 34rpx;">¥ {{singlePrice}}</view>
         <view style='margin-top: -6rpx;'>单独购买</view>
       </view>
-      <view class="footer-double base_orange_bg">
+      <view class="footer-double base_orange_bg" bindtap='goBuy' data-type="2">
         <view style="font-size: 34rpx;">¥ {{groupPrice}}</view>
         <view style='margin-top: -6rpx;'>发起拼团</view>
       </view>

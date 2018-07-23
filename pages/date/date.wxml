@@ -36,13 +36,15 @@
             <view class="day" wx:if="{{weeks[index]>4}}"></view>
             <view class="day" wx:if="{{weeks[index]>5}}"></view>
             <block wx:for="{{date}}" wx:for-index="idx" wx:key="idx">
-              <view class="day {{selectNum == idx && !item.outday && date[idx].stockqty? 'selected-view':''}}" bindtap="selectday" bindtap='sureBind' data-indexs="{{idx}}" data-stockqty="{{date[idx].stockqty}}">
+              <view class="day {{selectNum == idx && !item.outday && date[idx].stockqty? 'selected-view':''}}" bindtap='sureBind' data-indexs="{{idx}}" data-stockqty="{{date[idx].stockqty}}">
                 <text style='{{!item.outday || "color: #9e9e9e"}}' class='day_text'>{{date[idx].day}}</text>
                 <view class="actname" wx:if="{{date[idx].stockqty && !item.outday}}">
-                  <text space="emsp">￥{{date[idx].singlePrice}} </text>
+                  <text space="emsp" wx:if="{{typeId == '1'}}">￥{{date[idx].singlePrice}} </text>
+                  <text space="emsp" wx:else>￥{{date[idx].groupSinglePrice}} </text>
                 </view>
-                <view class="actname2" wx:if="{{date[idx].stockqty && !item.outday}}">
-                  <text style='{{selectNum != idx || "color: white"}}'>余{{date[idx].stockqty}}</text>
+                <view class="actname2" wx:if="{{date[idx].stockqty && !item.outday}}" style='{{footshow? "" : "width:107rpx;"}}'>
+                  <text wx:if='{{!footshow}}' style='{{selectNum != idx || "color: white"}}'>余{{date[idx].stockqty}}</text>
+                  <text wx:if='{{footshow}}' style='{{selectNum != idx || "color: white"}}'>￥{{date[idx].groupSinglePrice}}</text>
                 </view>
               </view>
             </block>
@@ -62,29 +64,57 @@
     <view>仅剩
       <text space='space="emsp"'> {{handadult.stockqty}} </text>位</view>
   </view>
+  <!-- 成人 -->
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
+    <view class="weui-cell" wx:if='{{!footshow}}'>
       <view class="weui-cell__bd">成人</view>
       <view class="weui-cell__bd" class='cell-text'>
-        <text>￥{{handadult.singlePrice * handlevalue1}}</text>
+        <text wx:if="{{typeId == '1'}}">￥{{handadult.singlePrice * handlevalue1}}</text>
+        <text wx:if="{{typeId == '2'}}">￥{{handadult.groupSinglePrice * handlevalue1}}</text>
       </view>
       <view class="weui-cell__bd" class='cell-text-last'>
-        <text>￥{{handadult.singlePrice}}*{{handlevalue1}}</text>
+        <text wx:if="{{typeId == '1'}}">￥{{handadult.singlePrice}}*{{handlevalue1}}</text>
+        <text wx:if="{{typeId == '2'}}">￥{{handadult.groupSinglePrice}} * {{handlevalue1}}</text>
       </view>
       <view class="weui-cell__bd" style='flex:2;text-align:right'>
         <i-input-number value="{{ handlevalue1 }}" min="0" max="100" bindchange="handleChangeOne" />
       </view>
     </view>
-    <view class="weui-cell">
+    <view class="weui-cell" wx:if='{{footshow}}'>
+      <view class="weui-cell__bd">成人</view>
+      <view class="single">单</view>
+      <text class="base_gray_little">¥{{handadult.singlePrice}} * {{handlevalue1}}</text>
+      <view class="group">团</view>
+      <text class="base_orange">¥{{handadult.groupSinglePrice}} * {{handlevalue1}}</text>
+      <view class="weui-cell__bd" style='flex:2;text-align:right'>
+        <i-input-number value="{{ handlevalue1 }}" min="0" max="100" bindchange="handleChangeOne" />
+      </view>
+    </view>
+    <!-- 儿童 -->
+    <view class="weui-cell" wx:if='{{!footshow}}'>
       <view class="weui-cell__bd">儿童
         <text bindtap='warnView' class="icon iconfont icon-changjianwenti"></text>
       </view>
       <view class="weui-cell__bd" class='cell-text'>
-        <text>￥{{handadult.kidsPrice * handlevalue2}}</text>
+        <text wx:if="{{typeId == '1'}}">￥{{handadult.kidsPrice * handlevalue2}}</text>
+        <text wx:if="{{typeId == '2'}}">￥{{handadult.groupKidsPrice * handlevalue2}}</text>
       </view>
       <view class="weui-cell__bd" class='cell-text-last'>
-        <text>￥{{handadult.kidsPrice}}*{{handlevalue2}}</text>
+        <text wx:if="{{typeId == '1'}}">￥{{handadult.kidsPrice}} * {{handlevalue2}}</text>
+        <text wx:if="{{typeId == '2'}}">￥{{handadult.groupKidsPrice}} * {{handlevalue2}}</text>
       </view>
+      <view class="weui-cell__bd" style='flex:2;text-align:right'>
+        <i-input-number value="{{ handlevalue2 }}" min="0" max="100" bindchange="handleChangeTwo" />
+      </view>
+    </view>
+    <view class="weui-cell" wx:if='{{footshow}}'>
+      <view class="weui-cell__bd">儿童
+        <text bindtap='warnView' class="icon iconfont icon-changjianwenti"></text>
+      </view>
+      <view class="single">单</view>
+      <text class="base_gray_little">¥{{handadult.kidsPrice}} * {{handlevalue2}}</text>
+      <view class="group">团</view>
+      <text class="base_orange">¥{{handadult.groupKidsPrice}} * {{handlevalue2}}</text>
       <view class="weui-cell__bd" style='flex:2;text-align:right'>
         <i-input-number value="{{ handlevalue2 }}" min="0" max="100" bindchange="handleChangeTwo" />
       </view>
@@ -99,7 +129,27 @@
     </view>
   </view>
 </view>
-<view class='hand-btton'>
-  <view class='hand-price'>￥{{amount}}</view>
+<view class='hand-btton' wx:if='{{!footshow}}'>
+  <view wx:if="{{typeId=='1'}}" class='hand-price'>￥{{amount}}</view>
+  <view wx:if="{{typeId=='2'}}" class='hand-price'>￥{{amountone}}</view>
   <view class='hand-confirm' style='{{amount||"background-color: #666"}}' bindtap="submitbtn">确定</view>
+</view>
+<!-- 底部购买按钮 -->
+<view class="footer" wx:if="{{footshow}}">
+  <view class="footer-tel">
+    <text class="icon iconfont icon-icon"></text>
+    <view>电话咨询</view>
+  </view>
+  <view class="footer-tel">
+    <text class="icon iconfont icon-yijianfankui"></text>
+    <view>在线咨询</view>
+  </view>
+  <view class="footer-single" style='{{amount||"background-color: #666"}}' bindtap='submitbtn' data-type="1">
+    <view style="font-size: 34rpx;">¥ {{amount}}</view>
+    <view style='margin-top: -6rpx;'>单独购买</view>
+  </view>
+  <view class="footer-double base_orange_bg" style='{{amountone||"background-color: #666"}}' bindtap='submitbtn' data-type="2">
+    <view style="font-size: 34rpx;">¥ {{amountone}}</view>
+    <view style='margin-top: -6rpx;'>发起拼团</view>
+  </view>
 </view>
