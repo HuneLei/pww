@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/finds/finds",
     "pages/item/item",
     "pages/login/login",
     "pages/order/order",

@@ -1,0 +1,45 @@
+<view class="find">
+  <view id="search-box" class="search-box">
+    <input class='search' placeholder-style="font-size:30rpx;" type="text" value="" placeholder="搜索目的地/景点/关键词" bindfocus="bindfocus"></input>
+    <text class="icon iconfont icon-sousuo search-icon"></text>
+  </view>
+  <!-- <loading :show="loading"></loading> -->
+  
+  <view class='container'>
+    <view class="con-wrap ripple {{cardRightIn?'flipInY':''}} {{cardLeftIn?'fadeInLeft':''}}">
+      <view class='card-box' bindtouchstart="touchstart" bindtouchmove="touchmove">
+        <!-- <image  class="card-img" style="background-image:url('{{item.cover}}')"></image> -->
+      </view>
+    </view>
+  </view>
+
+  <view class="card-box" v-bind:class="{ zoomIn: showOn, animated: true}">
+    <!-- <view class="card-bg " :style="`background-image: url(${nexProductItemImg});${bgImgHeight}`"></view> -->
+    <view class="card" ref="back" hover-class="hover_card">
+      <view class="img-box" style="background-image: url('{{nexProductItemImg}}')"></view>
+      <view class="name" id="name">
+        <text style="color:#ff7300">[{{productItem.groupMinOrder}}人拼]</text> {{productItem.name}}
+      </view>
+      <view class="info" id="info">
+        <view>
+          <view class="base_gray_little_little">单独购买：¥{{productItem.minSinglePrice}}起</view>
+          <view class="left base_orange">
+            <text class="list-num">￥{{productItem.minGroupSinglePrice}}</text>
+            <text style='font-size:26rpx'>起</text>
+          </view>
+        </view>
+        <view class="right">
+          <text class="icon iconfont icon-weizhi"></text> {{productItem.cityName}}出发
+        </view>
+      </view>
+      <view class="recom" id="recom">
+        <view class="recom-title">推荐指数</view>
+        <!-- <rater :value="5" :font-size="16" disabled active-color="#ff7300"></rater> -->
+      </view>
+      <view class="slide" wx:if="{{showSlideTip}}">
+        <text class="icon iconfont icon-zuo slide-icon"></text>
+        <view class="slide-text">左滑换一个</view>
+      </view>
+    </view>
+  </view>
+</view>

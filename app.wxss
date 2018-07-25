@@ -1,6 +1,7 @@
  @import 'style/weui.wxss'; 
  @import 'styles/reset.wxss'; 
  @import 'styles/iconfont.wxss'; 
+ @import 'styles/ripples.min.wxss';
 
 /* @import 'styles/flex.wxss';
 @import 'styles/button.wxss';
